@@ -1,4 +1,4 @@
 resources/
 .venv/
 *.DS_Store
-practice/data/
+labs/data/
