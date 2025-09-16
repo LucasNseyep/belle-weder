@@ -8,7 +8,7 @@ Hence, this project. It aims to predict weather at a hyperlocal scale with compu
 
 ## Progress so far
 - Through SVM, we’re able to distinguish between clouds and clear skies at a ~90% accuracy!
-- We aren’t completely able to distinguish the different types of atmospheric clouds (here too). We’re at ~20% accuracy so far.
+- We aren’t completely able to distinguish the different [types of atmospheric clouds](https://www.noaa.gov/jetstream/clouds/ten-basic-clouds) ([here](https://weather.metoffice.gov.uk/learn-about/weather/types-of-weather/clouds/cloud-names-classifications) too). We’re at ~20% accuracy so far.
 
 ## Next steps
 - Optimising the current models through hyperparameters
