@@ -14,3 +14,6 @@ Hence, this project. It aims to predict weather at a hyperlocal scale with compu
 - Optimising the current models through hyperparameters
 - Exploring other machine learning models
 - Grouping the different types of clouds into categories, which we can use to make a first classification, before finally classifying by type (logic tree) - suggestion: by atmospheric levels: high, medium, low.
+
+## Resources:
+- [CCSN databse](https://www.kaggle.com/datasets/mmichelli/cirrus-cumulus-stratus-nimbus-ccsn-database)
