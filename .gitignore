@@ -1,4 +1,4 @@
-resources/
+resources/cloud-images/
 .venv/
 *.DS_Store
 labs/
