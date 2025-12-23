@@ -133,7 +133,7 @@ The work I’ve done so far is well and good, but we’re obviously missing accu
 ### Next Steps
 My main focus at the moment, is to build a functioning (>90% accuracy) model. With the small size of the dataset, transfer learning is likely the best solution to get a well functioning model ASAP. Therefore these are the next steps I’ll be taking:
 
-1. Transfer learning using ResNet, Inception, EfficientNet, or VGG. - *why?*
+1. Transfer learning using ResNet, Inception, EfficientNet, or VGG - transfer learning reduces computational costs, required dataset size, and improves generisability
 2. Expand the CCSN dataset:
     1. Research for other image sources
     2. Data Augmentation
