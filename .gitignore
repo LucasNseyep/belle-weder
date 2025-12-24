@@ -1,4 +1,5 @@
 resources/cloud-images/
-.venv/
+notebooks/belle-weder-vision-lab-books/lab-book-3/datasets/flowers-102
+.venv
 *.DS_Store
 labs/
