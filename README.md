@@ -135,7 +135,7 @@ My main focus at the moment, is to build a functioning (>90% accuracy) model. Wi
 
 1. Transfer learning using ResNet, Inception, EfficientNet, or VGG - transfer learning reduces computational costs, required dataset size, and improves generisability
 2. Expand the CCSN dataset:
-    1. Research for other image sources
+    1. Research other image sources
     2. Data Augmentation
     3. Trying out different preprocessing modes
         1. Increasing the resolution of the images passed to the training model (we’ve been compressing them to 32*32)
@@ -146,3 +146,13 @@ My main focus at the moment, is to build a functioning (>90% accuracy) model. Wi
 
 UPDATE (20/12/2025):
 - Discovered that NASA JPL has an earth science project called GLOBE Observer. It has volunteers collect data and make observations using their smartphones. The data is then available through an open dataset. The open dataset has 1 million + weather entries with the type of clouds observed. At a glance, I would estimate that 10% of them have images linked to them. I’ll be working on extracting all of the images with their classes and adding them to their respective folders. While looking at the dataset, I also noticed that some classes tend to be combined/appear together in the atmosphere. It might be useful to also combine these into single classes or employ multi-label classification.
+
+UPDATE (05/01/2025):
+- Employed transfer learning on some pre-trained computer vision models (which use CNNs). Managed to reach an accuracy of ~0.50 (using `vit_b_16` on pytorch) which is a huge improvement on the 0.30 accuracy from before. Before applying transfer learning to the cloud images, I applied it to the *102 Category Flower Dataset*. The model reached an accuracy of ~0.90 after only 5 epochs?!
+What could this difference in accuracy be due to?
+  - It's harder to identify the underlying patterns in clouds vs flowers. ImageNet, which is the dataset the pre-trained model I employed was trained on contains 1000 object classes (ranging from fish and birds to clothes and everyday objects). These objects can be split into edges and shapes (what the lower levels of CNNs learns), which can be easily combined into more complex features and object (middle layers), which can then be combined into fully detailed objects (high layers). It was likely easier to train on the flowers because they're similar to the ImageNet objects, which is not at all the case for clouds.
+  ![CNN learned features byt Layer](resources/figures/cnn_learning_facial_features.png)
+- How do we move forward? There are 3 ways we can move forward from this:
+  1. So far I've been freezing the weights of all layers and only unfreezing the head (the final, task-specific layers - the fully connected (FC) layers and the output layer). One suggestion would be to gradually unfreeze lower levels of the CNN to train on. I have tried to this locally but I've encountered long processing times and execution errors. Solution here would be to employ a cloud provider such as AWS.
+  2. Improving the contrast and sharpening the edges of the images before training.
+  3. More training data. As mentioned in the previous update, I've found a database of cloud images. Expanding the dataset with those images could have an impact on the accuracy here.
