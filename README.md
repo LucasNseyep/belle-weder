@@ -2,6 +2,8 @@
 Last Updated: 13/01/2026
 
 ## TL;DR
+[Slides](https://docs.google.com/presentation/d/16sxZOPwjahf1FJiZXZWMHOnjbC8INxCv/edit?slide=id.p1#slide=id.p1)
+
 After experiencing dangerous weather in rural Cameroon with no mobile service, this project explores offline, hyperlocal weather prediction using computer vision.
 
 Instead of relying on heavy physics-based forecasts, it looks at predicting local weather by simply identifying cloud types from sky pics.
@@ -133,7 +135,7 @@ What could this difference in accuracy be due to?
   3. More training data. As mentioned in the previous update, I've found a database of cloud images. Expanding the dataset with those images could have an impact on the accuracy here.
 
 # Appendix
-## Random Forest Discussion
+### Random Forest Discussion
 The confusion matrices for Random Forest:
 ![Confusion Matrix 1](resources/figures/rf_clf_confusion_matrix.png)
 <small><small>Raw and normalised</small></small>
