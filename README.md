@@ -10,7 +10,7 @@ Instead of relying on heavy physics-based forecasts, it looks at predicting loca
 
 My early experiments use the CCSN cloud image dataset and lightweight machine-learning models to run on modest hardware. So far, performance is low (~50% accuracy score) using transfer learning, mainly due to limited data, low contrast in cloud images vs objects, and limited compute.
 
-Next, the focus is on improving transfer learning results with cloud computing, dataset exapnsion, and data augmentation to eventually deliver accurate forecasts on any low-cost device.
+Next, the focus is on improving transfer learning results with cloud computing, dataset expansion, and data augmentation to eventually deliver accurate forecasts on any low-cost device.
 
 ## Predict the Weather at the Click of a Shutter
 When I travelled back to Cameroon this summer to see my family, I visited my family village. It was a 5-hour drive from Yaounde, where we were staying.
