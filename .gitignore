@@ -4,3 +4,4 @@ notebooks/belle-weder-vision-lab-books/lab-book-3/datasets/flowers-102
 *.DS_Store
 labs/
 resources/past-readmes/
+notebooks/cached_features/
