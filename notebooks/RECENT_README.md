@@ -346,5 +346,104 @@ project-root/
     ├── resnet18_imagenet_probs_rf_cloud_classifier.ipynb
     ├── resnet18_multihead_512_cloud_classifier.ipynb
     ├── resnet18_cloud_filter_nasa_ac.ipynb
-    └── resnet18_cloud_filter_all_classes.ipynb
+    ├── resnet18_cloud_filter_all_classes.ipynb
+    ├── resnet18_cloud_filter_analysis.ipynb
+    ├── 07_transfer_learning.ipynb
+    └── 08_transfer_learning_filtered.ipynb
 ```
+
+---
+
+# Checkpoint 3 — ViT Feature Embeddings for 11-Class Cloud Classification
+
+**Current notebooks:** `07_transfer_learning.ipynb`, `08_transfer_learning_filtered.ipynb`
+
+This checkpoint covers the attempt at fine-grained 11-class cloud type classification using a Vision Transformer (ViT-B-16), first on the raw NASA GLOBE images, then repeated on the dataset cleaned by the ResNet18 filter from Checkpoint 2.
+
+---
+
+## Model: ViT-B-16 with SWAG Weights
+
+`vit_b_16` from torchvision loaded with `IMAGENET1K_SWAG_E2E_V1` weights — a stronger pretrained checkpoint than the standard ImageNet-1K weights, trained with weakly-supervised data. Input size is fixed at **384×384** by these weights.
+
+The ImageNet classification head is replaced with a new head:
+```python
+model.heads = nn.Sequential(nn.Dropout(p=0.1), nn.Linear(768, 11))
+```
+
+The entire encoder is frozen. Only the 11-class head is trained (~8,459 parameters out of ~86 million total).
+
+---
+
+## Feature Embedding and Caching
+
+Rather than running full forward passes through the ViT encoder on every training epoch, features are extracted once from the frozen encoder and cached to disk. Training then operates entirely on the cached embeddings.
+
+The class token output (`x[:, 0]`) from the ViT encoder is used as the 768-dimensional embedding for each image:
+
+```python
+def extract_features(model, loader, device):
+    model.eval()
+    with torch.no_grad():
+        for imgs, labels in loader:
+            x = model._process_input(imgs)
+            batch_class_token = model.class_token.expand(x.shape[0], -1, -1)
+            x = torch.cat([batch_class_token, x], dim=1)
+            x = model.encoder(x)
+            features = x[:, 0]   # 768-dim class token output
+```
+
+Cached splits are saved as `cached_features/train.pt`, `val.pt`, `test.pt` (notebook 07) and `cached_features_filtered/` (notebook 08). The cache is only recomputed if the files don't exist.
+
+**Why cache?** Feature extraction through ViT at 384×384 is slow (~minutes per epoch if done inline). Caching reduces each training epoch to a few seconds of linear head forward+backward passes on 768-dim vectors, making 300-epoch runs practical on a MacBook.
+
+---
+
+## Data Pipeline
+
+- **Split:** 80% train / 10% val / 10% test, stratified by class (`StratifiedShuffleSplit`)
+- **Max per class:** 3,000 images
+- **Class imbalance:** handled with `WeightedRandomSampler` — each class is sampled proportionally so the head sees a balanced stream regardless of raw class sizes
+- **Augmentation:** applied during feature extraction (train split only), including wrap/border translation, random flips, rotation, scale, and resized crop
+- **Classes:** 11 cloud types (Ac, As, Cb, Cc, Ci, Cs, Ct, Cu, Ns, Sc, St) — `ClSk` excluded
+
+---
+
+## Training
+
+- **Optimiser:** AdamW (default learning rate)
+- **Loss:** CrossEntropyLoss
+- **Epochs:** up to 300 with early stopping (patience=100)
+- **Checkpoint:** best validation accuracy saved to `best_model.pt` / `best_model_filtered.pt`
+
+---
+
+## Results
+
+| Notebook | Dataset | Test accuracy |
+|---|---|---|
+| `07_transfer_learning.ipynb` | Raw NASA GLOBE (dirty) | **47.5%** |
+| `08_transfer_learning_filtered.ipynb` | Filtered via ResNet18 CSV | TBD |
+
+The 47.5% baseline on dirty data is the reference. The filtered run (notebook 08) is the first attempt to quantify how much the data cleaning improves the result.
+
+---
+
+## Why 47.5% Is Hard to Beat with a Frozen Encoder
+
+Two factors compound here:
+
+1. **Domain mismatch:** ViT was trained on ImageNet objects. Its class token embedding encodes object-level concepts (shape, colour, texture of distinct foreground subjects). Cloud images have no distinct foreground subject — the discriminating signal is diffuse texture, luminance gradients, and macro structure (wispy vs layered vs puffy). These are not the features ImageNet training emphasised.
+
+2. **Fine-grained class similarity:** Several cloud types are visually similar even to expert human eyes (Ac vs Cc, Cs vs As, Sc vs St). A frozen encoder trained on 1000 dissimilar ImageNet objects will not naturally separate these.
+
+The data cleaning addresses the noise problem (dirty labels) but not the representational problem (frozen features). Meaningful further improvement likely requires unfreezing deeper encoder layers, which is compute-bound and better suited to cloud compute (AWS).
+
+---
+
+## Key Design Decisions
+
+- **Cache features, not images:** 768-dim cached embeddings reduce a 300-epoch run from hours to minutes without changing the result.
+- **Separate cache directories:** `cached_features/` and `cached_features_filtered/` keep the two runs independent so results can be compared directly.
+- **`Ct` threshold set to 0.0:** Contrails only had 200 images in the NASA GLOBE dataset and only 14% passed the 0.9 threshold used elsewhere. Rather than losing this class entirely, all 200 images are included regardless of filter confidence.
+- **`ClSk` excluded:** The 11-class task is cloud type identification; clear sky is not a cloud type and is not in the training set.
