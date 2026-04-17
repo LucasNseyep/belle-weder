@@ -447,3 +447,348 @@ The data cleaning addresses the noise problem (dirty labels) but not the represe
 - **Separate cache directories:** `cached_features/` and `cached_features_filtered/` keep the two runs independent so results can be compared directly.
 - **`Ct` threshold set to 0.0:** Contrails only had 200 images in the NASA GLOBE dataset and only 14% passed the 0.9 threshold used elsewhere. Rather than losing this class entirely, all 200 images are included regardless of filter confidence.
 - **`ClSk` excluded:** The 11-class task is cloud type identification; clear sky is not a cloud type and is not in the training set.
+
+---
+
+# Checkpoint 4 — Filtered Dataset, Sampling Strategy & Gradual Unfreezing
+
+**Current notebooks:** `08_transfer_learning_filtered.ipynb`, `08_1_transfer_learning_filtered.ipynb`, `08_2_transfer_learning_filtered.ipynb`, `colab_09_transfer_learning_filtered.ipynb`, `colab_10_transfer_learning_poc_unfreeze.ipynb`, `colab_11_transfer_learning_gradual_unfreeze.ipynb`
+
+This checkpoint covers: standardising the filter CSV, building a clean filtered image extract, comparing sampling strategies for cached-embedding training, establishing why end-to-end ViT training must run on Colab, and designing a gradual-unfreezing curriculum for the Colab notebooks.
+
+---
+
+## 1. CSV Column Standardisation
+
+The all-classes filter CSV (`cloud_filter_results.csv`) was saved with inconsistent column names across different runs. The canonical naming convention going forward is:
+
+| Column | Description |
+|---|---|
+| `folder` | Cloud type label (`Ac`, `Cu`, etc.) |
+| `filename` | Image filename |
+| `head2_pred` | Binary prediction: `cloud` or `clear_sky` |
+| `head2_conf` | head2 softmax probability for `cloud` (0 = clear_sky, 1 = cloud) |
+| `head1_pred` | Top-1 ImageNet class from the frozen ResNet18 head1 |
+| `head1_conf` | head1 top-1 confidence |
+
+The first clean export under this convention is saved as `cloud_filter_results_1.csv`. All downstream notebooks reference this file. A rename shim (`df.rename(columns={"cloud_conf": "head2_conf", ...})`) is applied at load time in any notebook that may encounter the old column names.
+
+---
+
+## 2. Per-Class Visual Analysis (`resnet18_cloud_filter_analysis.ipynb`)
+
+A standalone analysis notebook that loads `cloud_filter_results_1.csv` and generates four visualisations per cloud class:
+
+1. **head2 confidence distribution** — histogram with threshold and 0.5 lower-bound markers
+2. **Not-cloud samples** — 4×4 grid sorted by lowest head2 confidence
+3. **Borderline samples (0.5–threshold)** — random sample from the uncertain band
+4. **High-confidence cloud samples** — 4×4 grid sorted by highest head2 confidence
+
+Both `head2_pred/head2_conf` and `head1_pred/head1_conf` are shown in each image subtitle, allowing side-by-side comparison of the binary filter and the ImageNet backbone predictions.
+
+Per-class thresholds used throughout:
+
+| Class | Threshold | Notes |
+|---|---|---|
+| Ac, As, Cb, Cc, Ci, Cs, Cu, Ns, Sc, St | 0.8 | Conservative cutoff |
+| Ct | 0.0 | Only 200 images total — include all |
+
+---
+
+## 3. Filtered Image Extract (`_new_dataset_minifier.ipynb`)
+
+Rather than selecting images by CSV lookup at training time, a physical copy of the filtered dataset is built once and reused:
+
+- Reads `cloud_filter_results_1.csv`, applies per-class thresholds
+- For each class, **randomly samples** up to 3,000 images from the full `[threshold, 1.0]` confidence range (`random_state=42`)
+- Copies selected images to `resources/cloud-images/NASA_GLOBE_CD/extract_filtered/` preserving the per-class folder structure
+- Raises `FileExistsError` if the destination already exists (prevents accidental overwrites)
+
+**Why random sample across the full confidence range rather than top-N?** Taking only the highest-confidence images (alphabetical `.head()` or sorted) creates a biased subset skewed toward easy, visually obvious examples. Sampling across the full 0.8–1.0 range includes harder boundary cases that may help generalisation.
+
+**Resulting dataset:** 10 × 3,000 + 200 (Ct) = **30,200 images**
+
+---
+
+## 4. Cached Embedding Variants (Local — Notebooks 08 / 08_1 / 08_2)
+
+Three variants of the cached-embedding training notebook were produced to isolate the effect of image selection strategy vs training noise:
+
+| Notebook | Image selection | `random_state` | Cache dir | Checkpoint |
+|---|---|---|---|---|
+| `08_transfer_learning_filtered.ipynb` | random sample | 42 | `cached_features_filtered_v2/` | `best_model_filtered.pt` |
+| `08_1_transfer_learning_filtered.ipynb` | alphabetical (`.head()`) | 42 | `cached_features_filtered/` | `best_model_filtered_alphabetical.pt` |
+| `08_2_transfer_learning_filtered.ipynb` | random sample | 0 | `cached_features_filtered_v3/` | `best_model_filtered_seed0.pt` |
+
+**Key finding:** Confidence distribution analysis showed means within 0.005 of each other across all classes between alphabetical and random selection. The ~3% accuracy difference observed between notebook 08 and 08_1 is attributable to training noise rather than a real effect of sampling strategy. Notebook 08_2 (seed=0) was created to test this hypothesis with a different split seed.
+
+**Cache invalidation:** Each notebook checks for the existence of `{FEATURES_PATH}/train.pt`. If the directory is wiped, the extraction cell re-runs automatically. A utility cell in 08_2 (`shutil.rmtree(FEATURES_PATH)`) allows on-demand cache clearing.
+
+**Note on `num_workers`:** The `T.Lambda` in the augmentation pipeline cannot be pickled by Python's multiprocessing spawn context (macOS default). All DataLoaders use `num_workers=0` locally.
+
+---
+
+## 5. Why End-to-End ViT Training Must Run on Colab
+
+Notebooks `09_transfer_learning_e2e_filtered.ipynb` and `09_1_transfer_learning_e2e_filtered.ipynb` attempt full end-to-end ViT-B-16 fine-tuning locally. A single epoch (21k images × 384×384, batch=32, `num_workers=0`) took over 86 minutes on Apple Silicon MPS without completing — making 300-epoch runs infeasible locally.
+
+Root causes:
+- **`num_workers=0`** — all JPEG decoding, resizing (384×384), and augmentation runs in the main process, starving the GPU between batches
+- **Full 86M-parameter backprop on MPS** — MPS attention op throughput is significantly lower than CUDA; each backward pass takes several seconds
+
+The correct local approach remains the cached-embedding route (notebooks 08/08_1/08_2): extract once (~30 min), then each epoch is 2–5 seconds. End-to-end training is reserved for Colab GPU sessions.
+
+---
+
+## 6. Colab Notebook Family
+
+All Colab notebooks are based on `colab_06_1_transfer_learning.ipynb` (uses `IMAGENET1K_SWAG_LINEAR_V1` weights, `CUDA_LAUNCH_BLOCKING=1`, tqdm progress bars inside the train loop).
+
+| Notebook | Description |
+|---|---|
+| `colab_09_transfer_learning_filtered.ipynb` | Direct port of `colab_06_1` to `extract_filtered/` — heads-only training, 30 × 10 epochs |
+| `colab_10_transfer_learning_poc_unfreeze.ipynb` | Proof-of-concept gradual unfreezing — 10/5/5 epochs, no early stopping |
+| `colab_11_transfer_learning_gradual_unfreeze.ipynb` | Full gradual unfreezing — 100/50/30 max epochs with early stopping per phase |
+
+The only changes from `colab_06_1` in `colab_09`:
+
+| Field | `colab_06_1` | `colab_09` |
+|---|---|---|
+| `unzipped_images_dir` | `extract` | `extract_filtered` |
+| `zip_path` | `extract.zip` | `extract_filtered.zip` |
+| `expected_image_count` | 30559 | 30200 |
+| `IMAGES_PATH` | `extract` | `extract_filtered` |
+| `n_classes` / `num_classes` | 12 | 11 |
+
+---
+
+## 7. Gradual Unfreezing Strategy (Colab 10 & 11)
+
+ViT-B-16 has 12 transformer encoder layers (`model.encoder.layers[0]–[11]`). The standard approach is to unfreeze from the top down — the last layers are most task-specific and adapt fastest. Three phases:
+
+**Phase 1 — heads only**
+```python
+optimizer = torch.optim.AdamW(model.heads.parameters(), lr=1e-3)
+```
+
+**Phase 2 — unfreeze last encoder block (layer 11)**
+```python
+for param in model.encoder.layers[-1].parameters():
+    param.requires_grad = True
+
+optimizer = torch.optim.AdamW([
+    {"params": model.heads.parameters(),              "lr": 1e-4},
+    {"params": model.encoder.layers[-1].parameters(), "lr": 1e-5},
+])
+```
+
+**Phase 3 — unfreeze last 4 encoder blocks (layers 8–11)**
+```python
+for layer in model.encoder.layers[-4:-1]:  # layers 8, 9, 10
+    for param in layer.parameters():
+        param.requires_grad = True
+
+optimizer = torch.optim.AdamW([
+    {"params": model.heads.parameters(),                                           "lr": 1e-4},
+    {"params": model.encoder.layers[-1].parameters(),                              "lr": 1e-5},
+    {"params": [p for l in model.encoder.layers[-4:-1] for p in l.parameters()],  "lr": 5e-6},
+])
+```
+
+**LR rationale:** Each newly unfrozen group gets a 10× smaller LR than the previous phase. Pretrained weights are valuable; small gradients adjust them without destroying the representations learned during ImageNet training. Going deeper than the last 4 blocks is rarely worth it for a classification task of this scale.
+
+| Notebook | Phase 1 | Phase 2 | Phase 3 |
+|---|---|---|---|
+| `colab_10` (PoC) | 10 epochs | 5 epochs | 5 epochs |
+| `colab_11` (full) | 100 epochs, patience 20 | 50 epochs, patience 15 | 30 epochs, patience 10 |
+
+`colab_11` saves a checkpoint at each phase (`best_model_phase{1,2,3}.pt`) and restores the best weights before moving to the next phase. The plot cell at the end renders all three phases on a single continuous axis with colour-coded train/val curves.
+
+---
+
+## Key Design Decisions
+
+- **Random sampling across full confidence range:** Avoids selection bias toward the easiest images, at the cost of including harder borderline examples that test generalisation.
+- **Physical copy (`extract_filtered/`) rather than CSV lookup at training time:** Simplifies the Colab data pipeline — zip the directory, upload to Drive, extract. No CSV dependency at runtime.
+- **`colab_06_1` as the Colab base (not `colab_06`):** `colab_06_1` uses `IMAGENET1K_SWAG_LINEAR_V1` (224×224 linear probe weights) rather than `E2E_V1` (384×384 end-to-end weights), and includes `CUDA_LAUNCH_BLOCKING=1` for stable CUDA error reporting.
+- **Discriminative learning rates across unfreezing phases:** Rather than a single global LR for all unfrozen layers, each layer group gets its own LR (1e-4 / 1e-5 / 5e-6). Earlier layers get smaller LRs to preserve low-level features while allowing higher layers to specialise.
+- **`Ct` handled by `WeightedRandomSampler`:** With only 200 Ct images vs 3,000 for other classes, the sampler gives Ct images ~15× the sampling weight. Each Ct image is seen ~15 times per epoch with fresh augmentation, providing variation despite the small pool.
+
+---
+
+## Project Structure (updated)
+
+```
+project-root/
+├── models/
+│   └── multihead_resnet18_cloud_sky.pth
+├── resources/
+│   └── cloud-images/
+│       └── NASA_GLOBE_CD/
+│           ├── downloaded_images/          ← original raw images
+│           ├── extract_filtered/           ← filtered copy (30,200 images)
+│           │   ├── Ac/  As/  Cb/  Cc/  Ci/
+│           │   ├── Cs/  Ct/  Cu/  Ns/
+│           │   └── Sc/  St/
+│           ├── cloud_filter_results.csv    ← original filter output
+│           └── cloud_filter_results_1.csv  ← canonical filter CSV (standardised columns)
+└── notebooks/
+    ├── _new_dataset_minifier.ipynb
+    ├── resnet18_cloud_filter_analysis.ipynb
+    ├── 08_transfer_learning_filtered.ipynb         ← cached, random sample, seed=42
+    ├── 08_1_transfer_learning_filtered.ipynb       ← cached, alphabetical
+    ├── 08_2_transfer_learning_filtered.ipynb       ← cached, random sample, seed=0
+    ├── 09_transfer_learning_e2e_filtered.ipynb     ← end-to-end local (impractical)
+    ├── 09_1_transfer_learning_e2e_filtered.ipynb   ← end-to-end local, dir-scan loader
+    ├── colab_09_transfer_learning_filtered.ipynb   ← Colab, heads only
+    ├── colab_10_transfer_learning_poc_unfreeze.ipynb   ← Colab, PoC unfreezing
+    └── colab_11_transfer_learning_gradual_unfreeze.ipynb ← Colab, full unfreezing
+```
+
+---
+
+# Checkpoint 5 — GPU Training, Overfitting Analysis & Regularisation
+
+**Current notebooks:** `colab_11_1`, `colab_11_2`, `colab_11_3`
+
+This checkpoint covers: bug fixes discovered during Colab runs, end-to-end training results on L4 and A100 GPUs, overfitting analysis, and a regularised variant.
+
+---
+
+## 1. Bug Fixes
+
+### WeightedRandomSampler not wired up
+`WeightedRandomSampler` was defined in the DataLoader cell but never passed to `DataLoader` — `shuffle=True` was used instead. This meant Ct (only 140 training images) was never oversampled. Fixed in `colab_09`, `colab_10`, `colab_11`, `colab_11_1`, `colab_11_2`, `colab_11_3`:
+
+```python
+# before
+train_loader = DataLoader(train_set, batch_size=32, shuffle=True)
+
+# after
+train_loader = DataLoader(train_set, batch_size=32, sampler=sampler)
+```
+
+### T.Lambda pickling error (Python 3.12 / forkserver)
+Python 3.12 changed the default multiprocessing start method on Linux to `forkserver`, which requires all DataLoader worker arguments to be picklable. `T.Lambda(lambda ...)` is not picklable. Replaced with a named class in all Colab notebooks:
+
+```python
+class WrapTranslation:
+    def __init__(self, max_frac): self.max_frac = max_frac
+    def __call__(self, x):
+        h, w = x.shape[-2], x.shape[-1]
+        shift_h = int(torch.randint(-int(self.max_frac * h), int(self.max_frac * h) + 1, (1,)).item())
+        shift_w = int(torch.randint(-int(self.max_frac * w), int(self.max_frac * w) + 1, (1,)).item())
+        return torch.roll(x, shifts=(shift_h, shift_w), dims=(-2, -1))
+```
+
+Despite this fix, `num_workers > 0` still triggers `AssertionError: can only test a child process` during DataLoader teardown on Colab. All Colab notebooks use `num_workers=0`.
+
+---
+
+## 2. colab_09 Frozen Baseline Results (L4)
+
+4 runs × 10 epochs (40 total epochs), heads-only, `IMAGENET1K_SWAG_LINEAR_V1`:
+
+| Run | Test accuracy |
+|---|---|
+| 1 | 0.3263 |
+| 2 | 0.3265 |
+| 3 | 0.3280 |
+| 4 | 0.3180 |
+
+**Conclusion:** Frozen encoder ceiling confirmed at ~33%. Consistent across runs — this is a structural limit, not noise. Unfreezing is required to progress.
+
+---
+
+## 3. colab_10 PoC Unfreezing Results (L4, ~20 min/epoch)
+
+| Phase | Best val | Train at stop | Epochs |
+|---|---|---|---|
+| Phase 1 — heads only | 0.3490 | ~0.41 | 10 |
+| Phase 2 — + layers[-1] | 0.3702 | ~0.45 | 5 |
+| Phase 3 — + layers[-4:] | ~0.36 | ~0.52 | 5 |
+| **Test accuracy** | **0.3707** | | |
+
+Phase 2 produced a clear jump (+4pp over frozen baseline). Phase 3 showed early overfitting. No early stopping or checkpointing in this PoC notebook.
+
+---
+
+## 4. colab_11_2 Full Run Results (A100, bfloat16, batch_size=128, ~5 min/epoch)
+
+| Phase | Best val | Train at stop | Gap | Epochs to stop |
+|---|---|---|---|---|
+| Phase 1 — heads only | 0.3490 | ~0.43 | ~8% | 30 |
+| Phase 2 — + layers[-1] | 0.3755 | ~0.60 | ~22% | 40 |
+| Phase 3 — + layers[-4:] | **0.3755** | ~0.68 | ~30% | 15 |
+| **Test accuracy** | **0.3626** | | | |
+
+**Key finding: Phase 3 gave zero val improvement over Phase 2.** Unfreezing 4 blocks only added overfitting (30% train/val gap) without moving the ceiling. The model memorised training data but could not generalise further.
+
+---
+
+## 5. Overfitting Analysis
+
+The 30% train/val gap in Phase 3 indicates the model has more capacity than the data can support. Root causes:
+
+- **Dataset size:** 30,200 images (~21,000 train) is insufficient for fine-grained 11-class cloud classification with a 28M-parameter model
+- **Inter-class ambiguity:** Several cloud types (Ac/Cc, Cs/As, Sc/St) are visually similar even to experts; the model cannot reliably discriminate them with the available training signal
+- **Ct constraint:** Only 200 total Ct images (140 train). Despite WeightedRandomSampler's 15× oversampling, the variety is fundamentally limited
+
+**Data scaling analysis:** The current dataset uses 3,000 images/class at a 0.99 confidence threshold. Pool sizes at this threshold:
+
+| Class | Pool at 0.99 |
+|---|---|
+| Cb | 4,617 ← bottleneck |
+| Cc | 5,500 |
+| Cs | 7,039 |
+| Ci | 8,692 |
+| others | 8,354–58,460 |
+| Ct | 200 ← hard ceiling |
+
+Lowering the threshold to 0.95 would unlock significantly more images for the bottleneck classes. Target: 5,000–10,000 images/class, which is the typical range where ViT fine-tuning generalises well.
+
+---
+
+## 6. Notebook Variants
+
+| Notebook | GPU | Key differences from colab_11 |
+|---|---|---|
+| `colab_11_transfer_learning_gradual_unfreeze.ipynb` | L4 | Baseline full run |
+| `colab_11_1_transfer_learning_gradual_unfreeze_shm.ipynb` | L4 | Images extracted to `/dev/shm` (RAM-backed) |
+| `colab_11_2_transfer_learning_gradual_unfreeze_a100.ipynb` | A100 | bfloat16 AMP, batch_size=128 |
+| `colab_11_3_transfer_learning_gradual_unfreeze_regularised.ipynb` | A100 | + label_smoothing=0.1, weight_decay=0.05 |
+
+### /dev/shm (colab_11_1)
+Extracts the zip to `/dev/shm` (RAM filesystem) instead of `/content` (SSD). With `num_workers=0` the benefit is minimal — CPU transforms dominate loading time, not disk reads. Would matter more if workers were available.
+
+### bfloat16 AMP (colab_11_2)
+A100 Tensor Cores are optimised for bfloat16. Wrapping forward pass and loss in `torch.autocast(device_type='cuda', dtype=torch.bfloat16)` gives significant speedup with no GradScaler needed (bfloat16 has better numerical range than float16). Epoch time: ~5 min vs ~20 min on L4.
+
+### Regularisation (colab_11_3)
+Two changes targeting the overfitting:
+- `nn.CrossEntropyLoss(label_smoothing=0.1)` — softens targets, penalises overconfident predictions
+- `weight_decay=0.05` on all AdamW optimisers (up from default 0.01)
+
+Results pending.
+
+---
+
+## Key Design Decisions
+
+- **Phase 3 may not be worth running:** colab_11_2 showed Phase 3 adds no val improvement over Phase 2 while dramatically increasing overfitting. Future runs should consider stopping at Phase 2 and investing compute in more data instead.
+- **More data is a higher-priority fix than regularisation:** The train/val gap is a data problem. Regularisation (colab_11_3) is worth trying but unlikely to break through the ~0.38 ceiling without more training examples.
+- **A100 > L4 for this workload:** 4× speedup per epoch (5 min vs 20 min) makes the full 100/50/30 epoch budget practical. bfloat16 is free accuracy-wise.
+
+---
+
+## Project Structure (updated)
+
+```
+notebooks/
+├── colab_09_transfer_learning_filtered.ipynb
+├── colab_10_transfer_learning_poc_unfreeze.ipynb
+├── colab_11_transfer_learning_gradual_unfreeze.ipynb
+├── colab_11_1_transfer_learning_gradual_unfreeze_shm.ipynb       ← /dev/shm extraction
+├── colab_11_2_transfer_learning_gradual_unfreeze_a100.ipynb      ← A100, bfloat16
+└── colab_11_3_transfer_learning_gradual_unfreeze_regularised.ipynb ← label smooth + wd
+```
