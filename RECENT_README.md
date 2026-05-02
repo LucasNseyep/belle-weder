@@ -792,3 +792,60 @@ notebooks/
 ├── colab_11_2_transfer_learning_gradual_unfreeze_a100.ipynb      ← A100, bfloat16
 └── colab_11_3_transfer_learning_gradual_unfreeze_regularised.ipynb ← label smooth + wd
 ```
+
+---
+
+# Checkpoint 6 — CNN Backbone Selection (Replicating Paper Figure 7)
+
+**Current notebook:** `13_transfer_learning_densenet121_swimcat.ipynb`
+
+This checkpoint replicates the backbone selection experiment from *CloudDenseNet: Lightweight Ground-Based Cloud Classification* (Li et al., Sensors 2023). Before designing their CloudDenseNet architecture, the paper benchmarked 9 CNN backbones under identical conditions to justify their choice of DenseNet121.
+
+---
+
+## Experiment Setup
+
+The paper trained all 9 models on SWIMCAT — a small, clean dataset of 784 ground-based sky images across 5 broad categories (clear sky, patterned clouds, thick dark clouds, thick white clouds, veil clouds). It was chosen specifically because it's lightweight enough to benchmark multiple architectures quickly.
+
+All models used identical settings:
+
+- ImageNet pre-trained weights
+- Backbone fully frozen — only the classification head trained
+- Same hyperparameters across all models
+
+The paper used a 50/50 train/test split with no validation set. This notebook uses a 70/20/10 split to retain a validation set for early stopping, which is a strictly better setup — the results aren't directly comparable to the paper's 95.51% but are close enough to validate the implementation.
+
+**Note:** This notebook uses **SWIMCAT-extend** (not the original SWIMCAT). SWIMCAT-extend is an expanded version of the dataset with 2,100 images across 6 categories (the original 5 plus F-Veil Clouds), with 350 images per class. The dataset is located at `resources/cloud-images/Swimcat-extend/`.
+
+---
+
+## Results
+
+| Metric | Value |
+|---|---|
+| Best val accuracy | **0.9810** (epoch 47) |
+| Test accuracy | **0.9762** |
+| Early stop epoch | 67 (patience 20) |
+
+Training converged fast: 93.3% val by epoch 3, 95%+ by epoch 7. The model essentially plateaued in the 97–98% range from epoch 47 onwards with no further improvement.
+
+Train/val gap was negligible (~97.5% train vs 98.1% val at peak) — no overfitting. The frozen backbone + linear head is well regularised for a small clean dataset of this size.
+
+**Comparison to paper:** The paper reports 95.51% for DenseNet121 on the original SWIMCAT with a 50/50 split. Our 97.62% test accuracy on SWIMCAT-extend with a stricter 70/20/10 split is consistent with and exceeds that result, validating the implementation. The higher accuracy is likely a combination of the larger dataset (2,100 vs 784 images) and the cleaner 6-class taxonomy of SWIMCAT-extend.
+
+---
+
+## Key Design Decisions
+
+- **Plain shuffle over `WeightedRandomSampler`:** SWIMCAT-extend is perfectly balanced (350/class), so weighted sampling adds no benefit.
+- **`model.eval()` during training:** DenseNet121's frozen BatchNorm layers must stay in eval mode to keep running stats fixed. The classifier head is a plain Linear so train/eval mode makes no difference for it.
+- **6 classes instead of 5:** SWIMCAT-extend adds F-Veil Clouds vs the original SWIMCAT. The paper's 95.51% benchmark used 5 classes; direct comparison is approximate.
+
+---
+
+## Project Structure (updated)
+
+```
+notebooks/
+└── 13_transfer_learning_densenet121_swimcat.ipynb   ← DenseNet121, SWIMCAT-extend, head only
+```
