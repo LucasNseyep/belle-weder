@@ -849,3 +849,72 @@ Train/val gap was negligible (~97.5% train vs 98.1% val at peak) — no overfitt
 notebooks/
 └── 13_transfer_learning_densenet121_swimcat.ipynb   ← DenseNet121, SWIMCAT-extend, head only
 ```
+
+---
+
+---
+
+# Checkpoint 7 — CloudDenseNet Training on NASA GLOBE
+
+**Current notebook:** `14_transfer_learning_clouddensenet.ipynb`
+
+Replication of the CloudDenseNet training pipeline from *CloudDenseNet: Lightweight Ground-Based Cloud Classification* (Li et al., Sensors 2023), applied to the filtered NASA GLOBE dataset.
+
+---
+
+## What This Notebook Does
+
+Having confirmed DenseNet121 as the best backbone in Checkpoint 6, this notebook implements the paper's full training methodology:
+
+1. Replaces DenseNet121's default linear classifier with a custom **TopBlock** head
+2. Trains using **Focal Loss** instead of cross-entropy
+3. Follows the paper's exact **5-phase gradual unfreezing** schedule
+
+The data pipeline (CSV-filtered NASA GLOBE images, `WeightedRandomSampler`, augmentation transforms) is carried over unchanged from the previous notebook.
+
+---
+
+## Architecture: TopBlock
+
+The paper's TopBlock replaces the standard DenseNet121 linear classifier with a multi-layer MLP, initialised with LeCun uniform distribution:
+
+```
+BN → Dropout(0.5) → Linear(1024→512) → ReLU → BN → Dropout(0.25) → Linear(512→n_classes)
+```
+
+The paper specifies a 4-layer structure (1024→512→32→n_classes), but their target dataset has only 7 classes, making the 32-neuron bottleneck layer appropriate. With 10 classes here, a 2-layer version is used instead to avoid an unnecessarily tight bottleneck.
+
+---
+
+## Training Schedule
+
+The backbone starts from stock **ImageNet pretrained weights** (`IMAGENET1K_V1`) — no cloud-specific pretraining. The paper's 5-phase schedule is followed exactly:
+
+| Phase | Layers unfrozen | Head LR | Backbone LR | Epochs |
+|-------|----------------|---------|-------------|--------|
+| 1 | TopBlock only | 1e-4 | — | 10 |
+| 2 | TopBlock only | 1e-5 | — | 10 |
+| 3 | TopBlock + DenseBlock3 onwards | 1e-5 | 5e-5 | 20 |
+| 4 | TopBlock + DenseBlock3 onwards | 1e-5 | 1e-5 | 20 |
+| 5 | All layers | 1e-6 | 1e-6 | 20 |
+
+Phases 1–2 warm up the TopBlock before any backbone weights are touched. Phase 3 onwards unfreezes from DenseNet121's 3rd dense block (layer 141) as specified in the paper. Best weights are checkpointed and restored between phases. Total budget: 80 epochs.
+
+---
+
+## Key Design Decisions
+
+- **Focal Loss (γ=2.0):** Down-weights easy, high-confidence examples — better suited than cross-entropy for a dataset where some cloud types are visually ambiguous and hard to separate.
+- **AdamW with weight decay:** L2 regularisation baked into the optimiser, as specified in the paper, to combat overfitting during the deeper unfreezing phases.
+- **Frozen BatchNorm handling:** Frozen BN layers are kept in eval mode throughout training so their running statistics are not corrupted by the unfrozen layers' gradients.
+- **`max_per_class=3,000`:** Matches the paper's 3,000-per-class data scale, drawn directly from the filtered NASA GLOBE pool (10 classes × 3,000 = 30,000 images total; train/val/test split: 21,000 / 3,000 / 6,000).
+- **Needs Colab:** 80 epochs × 30,000 images at 224×224 is not feasible locally. Target an A100 runtime.
+
+---
+
+## Project Structure (updated)
+
+```
+notebooks/
+└── 14_transfer_learning_clouddensenet.ipynb   ← CloudDenseNet replication, NASA GLOBE, 5-phase unfreeze
+```
