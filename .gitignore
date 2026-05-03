@@ -7,3 +7,4 @@ resources/past-readmes/
 notebooks/cached_features/
 models/
 *.pt
+.claude
