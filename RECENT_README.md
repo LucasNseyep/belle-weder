@@ -918,3 +918,278 @@ Phases 1–2 warm up the TopBlock before any backbone weights are touched. Phase
 notebooks/
 └── 14_transfer_learning_clouddensenet.ipynb   ← CloudDenseNet replication, NASA GLOBE, 5-phase unfreeze
 ```
+
+---
+
+# Checkpoint 8 — GCD Backbone Training (CloudDenseNet on GCD Dataset)
+
+**Current notebook:** `15_1_transfer_learning_gcd_densenet_balanced.ipynb`
+
+This checkpoint trains the full CloudDenseNet architecture (DenseNet121 + TopBlock) on the **Ground-based Cloud Dataset (GCD)** — a separate, publicly available benchmark dataset with 7 cloud type classes. The goal is to produce a backbone that has learned cloud-specific visual features, which can then be transferred to NASA GLOBE classification.
+
+---
+
+## Why GCD Instead of Training NASA GLOBE End-to-End
+
+The NASA GLOBE dataset suffers from two compounding problems: label ambiguity (several cloud types look similar even to experts) and contamination (non-cloud images under cloud-type labels, partially cleaned by the ResNet18 filter). Training a backbone on GCD first gives the model cloud-domain representations without those problems — GCD is a smaller, cleaner, purpose-built benchmark.
+
+---
+
+## Architecture
+
+Same TopBlock as notebook 14 (BN → Dropout(0.5) → Linear(1024→512) → ReLU → BN → Dropout(0.25) → Linear(512→n_classes)), but with `n_classes=7` to match GCD's 7-class taxonomy.
+
+---
+
+## Training
+
+- **Dataset:** GCD (7 cloud types), balanced with `WeightedRandomSampler`
+- **Loss:** FocalLoss (γ=2.0)
+- **Backbone init:** DenseNet121 ImageNet pretrained weights (`IMAGENET1K_V1`)
+- **Schedule:** Gradual unfreezing (same 5-phase schedule as notebook 14, adapted to GCD class count)
+- **Result:** ~91.5% test accuracy
+- **Checkpoint:** `best_cloudensenet_15_1.pt` (local), `best_cloudensenet_colab_15_1.pt` (Google Drive)
+
+---
+
+## Additions
+
+A **confusion matrix cell** was added after the training curves plot — seaborn heatmap with raw counts, GCD class name labels on both axes, `figsize=(9,7)`. Uses `sklearn.metrics.confusion_matrix` with no AMP (local notebook style).
+
+---
+
+## Project Structure (updated)
+
+```
+notebooks/
+├── 14_transfer_learning_clouddensenet.ipynb
+└── 15_1_transfer_learning_gcd_densenet_balanced.ipynb   ← GCD training, 7-class, ~91.5% accuracy
+models/
+├── best_cloudensenet_15_1.pt                            ← local GCD checkpoint
+```
+
+---
+
+---
+
+# Checkpoint 9 — GCD→GLOBE Domain Adaptation (Notebook 16)
+
+**Current notebooks:** `16_gcd_backbone_to_globe.ipynb`, `colab_16_gcd_backbone_to_globe.ipynb`
+
+This checkpoint implements **domain-adaptive transfer learning**: the GCD-trained DenseNet121 backbone from Checkpoint 8 is used as a frozen feature extractor; the 7-class TopBlock head is discarded and replaced with a fresh 10-class TopBlock for NASA GLOBE classification.
+
+---
+
+## Motivation
+
+The GCD backbone has learned cloud-specific texture and structure representations — visually much closer to NASA GLOBE imagery than ImageNet-trained weights. Starting from a cloud-domain backbone rather than ImageNet is expected to reduce the number of epochs needed and raise the accuracy ceiling, particularly in the ambiguous cloud-type classes.
+
+---
+
+## 3-Step GCD Checkpoint Load
+
+Loading the GCD checkpoint requires matching the saved model's shape (7-class head) before swapping in the 10-class head:
+
+```python
+# Step 1: attach a 7-class TopBlock to match checkpoint shape
+model.classifier = TopBlock(in_features=1024, n_classes=7)
+# Step 2: load GCD weights
+model.load_state_dict(torch.load('best_cloudensenet_colab_15_1.pt', weights_only=True))
+# Step 3: freeze backbone, replace head with fresh 10-class TopBlock
+for param in model.parameters():
+    param.requires_grad = False
+model.classifier = TopBlock(in_features=1024, n_classes=10)
+```
+
+---
+
+## 3-Phase Unfreezing Schedule
+
+| Phase | Layers unfrozen | LRs | Epochs | Patience |
+|-------|----------------|-----|--------|---------|
+| 1 | TopBlock only | head: 1e-4 | 20 | 10 |
+| 2 | TopBlock + denseblock4 + transition3 | head: 1e-4, block4: 1e-5 | 30 | 10 |
+| 3 (conditional) | + denseblock3 + transition2 | head: 1e-4, block4: 1e-5, block3: 5e-6 | 20 | 8 |
+
+Phase 3 only runs if `phase2_best_val − phase1_best_val > 0.01` (>1pp improvement gate). Each phase restores the previous phase's best checkpoint before unfreezing and creating the new optimizer. A per-phase checkpoint file is saved (`best_nasa_phase1.pt`, `best_nasa_phase2.pt`, `best_nasa_phase3.pt`).
+
+---
+
+## Results (local run, 2026-05-03)
+
+| Phase | Best val accuracy | Notes |
+|-------|------------------|-------|
+| Phase 1 (head only, 1e-4) | **0.3237** | Converged by epoch 12 |
+| Phase 2 (block4+tr3, 1e-5) | **0.3447** | +2.1pp over Phase 1 → Phase 3 triggered |
+| Phase 3 (block3+tr2, 5e-6) | **0.3507** | Early stop at epoch 16 (patience 8) |
+
+**Final checkpoint:** `best_nasa_phase3.pt`
+
+Phase 2 gain of +2.10pp exceeded the >1pp gate, so Phase 3 ran. Phase 3 added a further +0.6pp with early stopping at epoch 16.
+
+---
+
+## Notebooks
+
+| Notebook | Environment | Key differences |
+|----------|-------------|----------------|
+| `16_gcd_backbone_to_globe.ipynb` | Local (MPS) | `T.Lambda` wrap translation, `num_workers=0`, `batch_size=64`, no AMP, CSV-filtered data via `index_labeled_images_filtered` |
+| `colab_16_gcd_backbone_to_globe.ipynb` | Colab (CUDA) | `WrapTranslation` picklable class, CUDA AMP (`GradScaler` + `autocast`), `batch_size=128`, `fused=True`, Drive mount + `extract_filtered.zip` |
+
+---
+
+## Key Design Decisions
+
+- **3-phase over 5-phase:** Reduced from notebook 14's 5-phase schedule to 3 phases — fewer transitions, faster iteration, and the GCD backbone needs less warm-up than an ImageNet backbone since features are already cloud-domain.
+- **Conditional Phase 3:** Avoids wasting compute on a Phase 3 run when Phase 2 showed no improvement, while still allowing deeper unfreezing when warranted.
+- **Checkpoint restore between phases:** Each phase starts from the best weights of the previous phase rather than the final epoch, ensuring clean transitions without accumulated suboptimal state.
+- **Class-balanced sampling:** `WeightedRandomSampler` handles the uneven GLOBE class sizes (Ct is severely underrepresented).
+
+---
+
+## Project Structure (updated)
+
+```
+notebooks/
+├── 15_1_transfer_learning_gcd_densenet_balanced.ipynb
+├── 16_gcd_backbone_to_globe.ipynb               ← local, domain adaptation, 3-phase
+└── colab_16_gcd_backbone_to_globe.ipynb         ← Colab, domain adaptation, 3-phase, AMP
+models/
+├── best_cloudensenet_15_1.pt                    ← GCD source backbone (local)
+├── best_nasa_phase1.pt                          ← GLOBE Phase 1 checkpoint
+├── best_nasa_phase2.pt                          ← GLOBE Phase 2 checkpoint
+└── best_nasa_phase3.pt                          ← GLOBE Phase 3 checkpoint (final)
+```
+
+---
+
+# Checkpoint 10 — GLOBE Patches + GCD (clearsky/mixed), ImageNet Init (Notebook 18)
+
+**Current notebook:** `18_globe_patches_imagenet.ipynb`
+
+This checkpoint introduces a **hybrid dataset** strategy: the five GCD cloud types that have a direct NASA GLOBE equivalent are replaced with proportional 224×224 patches extracted from raw GLOBE images, while the two GCD-only classes (`4_clearsky`, `7_mixed`) are loaded straight from the GCD split as full images. The backbone starts from **ImageNet weights** (no GCD pre-training), following notebook 15's 5-phase gradual-unfreeze schedule.
+
+**Test accuracy: 0.4987** — a significant jump over the GCD-backbone GLOBE runs (nb16: 0.34, nb17: incomplete), achieved by combining cleaner GLOBE patch data for the 5 shared classes with the precise GCD ground truth for the 2 unique classes.
+
+---
+
+## Motivation
+
+Notebooks 16 and 17 showed that adapting a GCD backbone to the full 10-class GLOBE taxonomy is hard — the domain gap between the two datasets' labelling conventions and image characteristics limits how well GLOBE classification can benefit from GCD pretraining. This notebook tests a different hypothesis: **use GLOBE's own data for the classes where it exists, and fall back to GCD only where there is no GLOBE equivalent**. By keeping the 7-class GCD taxonomy instead of expanding to 10 GLOBE-only classes, the classifier stays focused on a shared taxonomy with higher-quality ground truth for the two GCD-exclusive types.
+
+---
+
+## Class Mapping
+
+| GCD class | Source in this notebook |
+|-----------|------------------------|
+| `1_cumulus` | NASA GLOBE `Cu` patches |
+| `2_altocumulus` | NASA GLOBE `Ac` patches |
+| `3_cirrus` | NASA GLOBE `Ci` patches |
+| `4_clearsky` | GCD full images (no GLOBE equivalent) |
+| `5_stratocumulus` | NASA GLOBE `Sc` patches |
+| `6_cumulonimbus` | NASA GLOBE `Cb` patches |
+| `7_mixed` | GCD full images (no GLOBE equivalent) |
+
+Five GLOBE-only classes (As, Cc, Cs, Ns, St) are excluded — this notebook targets the shared taxonomy, not the full GLOBE set.
+
+---
+
+## Data Pipeline
+
+### GLOBE images (5 matching classes)
+1. Load raw GLOBE images via `cloud_filter_results_1.csv` — keep only images with `head2_conf ≥ 0.99`, cap to 3,000 per class (same as nb16).
+2. Split at **image level** (70/10/20) before patch expansion to prevent patch leakage across splits.
+3. Extract proportional 224×224 patches: `CROP_FRACTION=0.5`, `OVERLAP=0.25` → ~6.6 patches/image on average.
+4. Filter patches with ResNet18 cloud classifier: keep patches with `head2_conf ≥ 0.5`.
+5. Cap training patches to **3,000/class** (seed=42).
+
+> All training patches passed the 0.5 cloud filter (100% kept) — as expected, since parent images were already filtered at 0.99 confidence.
+
+### GCD images (2 classes)
+- Load `4_clearsky` and `7_mixed` from the existing GCD train/test split.
+- Carve 20% val from GCD train (stratified, seed=42).
+- Apply standard full-image transforms (Resize to 224×224 + RandomResizedCrop augmentation, as in nb15).
+
+### Final split sizes
+
+| Split | GLOBE patches | GCD images | Total |
+|-------|--------------|-----------|-------|
+| train | 15,000 (5 × 3,000) | 1,998 (clearsky 1,720 + mixed 278) | 16,998 |
+| val | 9,091 | 500 | 9,591 |
+| test | 18,178 | 2,196 | 20,374 |
+
+### Class counts in training set
+
+| Class | Count | Source |
+|-------|-------|--------|
+| 1_cumulus | 3,000 | GLOBE patches |
+| 2_altocumulus | 3,000 | GLOBE patches |
+| 3_cirrus | 3,000 | GLOBE patches |
+| 4_clearsky | 1,720 | GCD full images |
+| 5_stratocumulus | 3,000 | GLOBE patches |
+| 6_cumulonimbus | 3,000 | GLOBE patches |
+| 7_mixed | 278 | GCD full images |
+
+`WeightedRandomSampler` handles the imbalance between GLOBE and GCD classes.
+
+---
+
+## Two Transform Pipelines
+
+Because GLOBE patches are already 224×224 while GCD images are full-resolution, two separate training transform sets are used:
+
+| Transform | Used for | Key difference |
+|-----------|----------|---------------|
+| `gcd_train_transforms` | GCD full images | includes `T.Resize` + `T.RandomResizedCrop` |
+| `globe_train_transforms` | GLOBE patches | no Resize or RandomResizedCrop — patches already 224×224 |
+| `eval_transforms` | Both val/test | `T.Resize` (no-op for patches, correct for full images) |
+
+Datasets are combined with `ConcatDataset([globe_patch_set, gcd_set])`.
+
+---
+
+## Model & Training
+
+- **Backbone:** DenseNet121, ImageNet pretrained weights (`IMAGENET1K_V1`), backbone frozen at start.
+- **Head:** TopBlock (BN→Dropout(0.5)→Linear(1024→512)→ReLU→BN→Dropout(0.25)→Linear(512→7)), LeCun uniform init.
+- **Loss:** Focal Loss (γ=2.0).
+- **Optimiser:** AdamW (weight_decay=1e-4) per phase.
+
+| Phase | Layers | Head LR | Backbone LR | Epochs | Patience |
+|-------|--------|---------|-------------|--------|---------|
+| 1 | TopBlock only | 1e-4 | — | 10 | 10 |
+| 2 | TopBlock only | 1e-5 | — | 10 | 10 |
+| 3 | TopBlock + DenseBlock3+ | 1e-5 | 5e-5 | 20 | 10 |
+| 4 | TopBlock + DenseBlock3+ | 1e-5 | 1e-5 | 20 | 10 |
+| 5 | All layers | 1e-6 | 1e-6 | 20 | 10 |
+
+Checkpoint: `best_cloudensenet_18.pt`
+
+---
+
+## Result
+
+**Final test accuracy: 0.4987**
+
+This is the best GLOBE-related result so far — +15pp over the GCD-backbone domain adaptation in nb16 (0.34). The gain likely comes from a combination of: (1) using GLOBE's own images for the 5 shared classes rather than trying to bridge the GCD→GLOBE domain gap, (2) patch-level data augmentation expanding the effective training set ~6.6×, and (3) the precise GCD labels for clearsky/mixed providing clean supervision for those hard-to-filter classes.
+
+---
+
+## Visualisation Cell
+
+A patch inspection cell is included immediately after the capping step (cell `ea0d9bca`). It renders a **5-row × 6-column grid** — one row per GLOBE class, six randomly sampled raw patch crops per row — so it's easy to verify what the model will actually see in training. Patches are shown before any transforms are applied.
+
+---
+
+## Project Structure (updated)
+
+```
+notebooks/
+├── 15_transfer_learning_gcd_densenet.ipynb           ← GCD 7-class, 5-phase, ImageNet init
+├── 16_gcd_backbone_to_globe.ipynb                    ← GCD backbone → GLOBE 10-class, 3-phase
+├── 17_gcd_backbone_to_globe_patches.ipynb            ← GCD backbone → GLOBE patches, 3-phase
+└── 18_globe_patches_imagenet.ipynb                   ← GLOBE patches + GCD (clearsky/mixed), ImageNet, 5-phase
+models/
+└── best_cloudensenet_18.pt                           ← nb18 checkpoint (test acc 0.4987)
+```
