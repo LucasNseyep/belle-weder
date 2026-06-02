@@ -1,0 +1,1588 @@
+<!DOCTYPE html><html><head>
+      <title>RECENT_README</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/lucasnseyep/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.27/crossnote/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-details{margin:0;padding:0;border:none}.markdown-preview .md-toc summary.md-toc-link-wrapper{cursor:pointer;list-style-position:outside}.markdown-preview .md-toc summary.md-toc-link-wrapper::marker{font-size:.85em}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='0']{margin-left:12px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='1']{margin-left:28px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='2']{margin-left:44px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='3']{margin-left:60px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='4']{margin-left:76px}.markdown-preview .md-toc .md-toc-link-wrapper[data-level='5']{margin-left:80px}.markdown-preview a.tag,.markdown-preview a.tag:active,.markdown-preview a.tag:link,.markdown-preview a.tag:visited,.markdown-preview span.tag:not(.token){display:inline-block;background-color:var(--vscode-badge-background,rgba(127,127,127,.18));color:var(--vscode-badge-foreground,currentColor);border-radius:2em;font-size:.85em;font-weight:500;padding:.05em .55em;line-height:1.5;white-space:nowrap;text-decoration:none;text-shadow:none;box-shadow:none;transition:background-color .12s ease,opacity .12s ease}.markdown-preview a.tag{cursor:pointer}.markdown-preview a.tag:focus,.markdown-preview a.tag:hover{background-color:var(--vscode-badge-background,rgba(127,127,127,.32));color:var(--vscode-badge-foreground,currentColor);opacity:.85;text-decoration:none;outline:0}.markdown-preview .wikilink-embed-content{border-left:3px solid var(--vscode-textBlockQuote-border,rgba(128,128,128,.3));background:var(--vscode-textBlockQuote-background,rgba(128,128,128,.05));margin:.5em 0;padding:.5em .75em;border-radius:0 3px 3px 0}.markdown-preview .wikilink-embed-content.wikilink-embed-error{border-left-color:var(--vscode-errorForeground,#cf222e);color:var(--vscode-errorForeground,#cf222e);font-style:italic;opacity:.8}.markdown-preview .wikilink-embed-content h1:first-child,.markdown-preview .wikilink-embed-content h2:first-child,.markdown-preview .wikilink-embed-content h3:first-child,.markdown-preview .wikilink-embed-content h4:first-child,.markdown-preview .wikilink-embed-content h5:first-child,.markdown-preview .wikilink-embed-content h6:first-child{margin-top:.25em}.markdown-preview .wikilink-embed-content .wikilink-embed-content{margin:.25em 0;padding:.25em .5em}.markdown-preview .block-id{display:none}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-details{margin:0;padding:0;border:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='0']{padding-left:0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='1']{padding-left:16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='2']{padding-left:32px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='3']{padding-left:48px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='4']{padding-left:64px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper[data-level='5']{padding-left:80px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script>
+    </head>
+    <body for="html-export">
+      <div class="crossnote markdown-preview  ">
+      <div>
+<h1 id="ground-based-cloud-image-classification">Ground-Based Cloud Image Classification </h1>
+<p>A computer vision project for classifying cloud types from ground-based sky photographs, using the NASA GLOBE Observer dataset. The goal is to replicate and extend findings from an academic paper on cloud classification using classical machine learning pipelines.</p>
+<hr>
+<h2 id="project-status">Project Status </h2>
+<p><strong>Current notebook:</strong> <code>colab_05_eda_visualize_insights_replicate_paper_with_smote.ipynb</code></p>
+<p>This is the 5th major iteration. It focuses on exploratory data analysis, class imbalance correction via image augmentation (with SMOTE in the name as a conceptual reference), and a baseline multi-classifier evaluation sweep using flattened grayscale image features.</p>
+<hr>
+<h2 id="dataset">Dataset </h2>
+<p><strong>Source:</strong> NASA GLOBE Cloud Observer dataset<br>
+<strong>Location:</strong> <code>../resources/cloud-images/NASA_GLOBE_CD/downloaded_images/</code></p>
+<p>Images are organized into subdirectories by cloud label. The loader caps each class at 3,000 images to avoid memory issues during experimentation.</p>
+<p><strong>Cloud classes encountered in the data (abbreviated labels):</strong></p>
+<ul>
+<li><code>ClSk</code> — Clear Sky</li>
+<li><code>Ct</code> — Contrails</li>
+<li>Several additional cloud-type categories (cumulus, stratus, cirrus variants, etc.)</li>
+</ul>
+<p>The dataset has a notable <strong>class imbalance</strong>, with <code>ClSk</code> (Clear Sky) and <code>Ct</code> (Contrails) being significantly underrepresented compared to other cloud types.</p>
+<hr>
+<h2 id="notebook-walkthrough">Notebook Walkthrough </h2>
+<h3 id="1-image-indexing">1. Image Indexing </h3>
+<p>The notebook scans the image directory, builds a dictionary mapping each filename to its label and path, and caps each class at 3,000 samples.</p>
+<h3 id="2-image-loading--preprocessing">2. Image Loading &amp; Preprocessing </h3>
+<p>Images are loaded with OpenCV, converted to <strong>grayscale</strong>, and resized to <strong>64×64 pixels</strong>. Labels are extracted in parallel with the images. Failed/missing reads are skipped gracefully.</p>
+<h3 id="3-exploratory-data-analysis">3. Exploratory Data Analysis </h3>
+<p>Two sets of bar charts are produced:</p>
+<ul>
+<li><strong>Proportional distribution</strong> of labels across the full dataset</li>
+<li><strong>Absolute count distribution</strong> to surface the raw imbalance</li>
+</ul>
+<h3 id="4-traintest-split">4. Train/Test Split </h3>
+<p>A <code>StratifiedShuffleSplit</code> (80/20) preserves class proportions across the split. Labels are integer-encoded with <code>LabelEncoder</code>. A side-by-side bar chart confirms the split is stratified correctly.</p>
+<h3 id="5-data-augmentation-for-class-balancing">5. Data Augmentation for Class Balancing </h3>
+<p>Rather than SMOTE (which is referenced in the filename conceptually), the notebook uses <strong>torchvision-based augmentation</strong> to oversample the two minority classes (<code>ClSk</code> at index 5, <code>Ct</code> at index 7).</p>
+<p>The augmentation pipeline randomly applies combinations of:</p>
+<ul>
+<li><strong>Wrap translation</strong> (circular roll) and <strong>border translation</strong> (black-padded affine shift), up to ±14% of image dimensions</li>
+<li>Horizontal flip (p=0.5) and vertical flip (p=0.15)</li>
+<li>Random rotation (±20°)</li>
+<li>Random scaling (90–110%) and random resized crop (80–100% of area)</li>
+</ul>
+<p>Two pipeline modes — <code>stacked</code> (applies multiple transforms in sequence) and <code>one_of</code> (applies one at random) — are randomly chosen per image. Minority class images are duplicated until they approach the count of a majority class (capped at 80% × 3,000 = 2,400 samples per class).</p>
+<p>After augmentation, the combined training set is <strong>shuffled</strong> to prevent ordering artifacts.</p>
+<h3 id="6-feature-extraction">6. Feature Extraction </h3>
+<p>Images are <strong>flattened</strong> from <code>(64, 64)</code> to <code>4096</code>-dimensional vectors for use with scikit-learn classifiers. No CNN or learned feature extraction is used at this stage — raw pixel values are the feature set.</p>
+<h3 id="7-baseline-classifier-sweep">7. Baseline Classifier Sweep </h3>
+<p>A suite of classifiers is evaluated with <strong>5-fold stratified cross-validation</strong>, scored by <strong>macro F1</strong> (appropriate for imbalanced multi-class problems). Models include:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gaussian Naive Bayes</td>
+<td>No scaling</td>
+</tr>
+<tr>
+<td>Logistic Regression</td>
+<td>With StandardScaler</td>
+</tr>
+<tr>
+<td>Linear SVC (SGD)</td>
+<td>With StandardScaler</td>
+</tr>
+<tr>
+<td>SVC (RBF kernel)</td>
+<td>With StandardScaler, <code>probability=True</code></td>
+</tr>
+<tr>
+<td>K-Nearest Neighbors</td>
+<td>With StandardScaler</td>
+</tr>
+<tr>
+<td>Decision Tree</td>
+<td>No scaling</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td>No scaling</td>
+</tr>
+<tr>
+<td>Gradient Boosting</td>
+<td>150 estimators, lr=0.1, max_depth=3, subsample=0.7</td>
+</tr>
+<tr>
+<td>HistGradientBoosting</td>
+<td>No scaling</td>
+</tr>
+<tr>
+<td>MLP (Neural Net)</td>
+<td>With StandardScaler, max_iter=500</td>
+</tr>
+</tbody>
+</table>
+<p>Results are returned as a DataFrame sorted by mean cross-val score, with standard deviation and wall-clock time per model.</p>
+<hr>
+<h2 id="key-design-decisions">Key Design Decisions </h2>
+<ul>
+<li><strong>Grayscale only:</strong> Color information is discarded. This is intentional for the baseline — cloud texture and structure are the discriminating features, not color.</li>
+<li><strong>64×64 resolution:</strong> Balances detail retention with memory and compute constraints for classical ML on flat features.</li>
+<li><strong>Augmentation over SMOTE:</strong> SMOTE on raw pixel vectors tends to produce blurry, unrealistic interpolations. Augmentation generates more plausible synthetic samples. The filename references SMOTE as the original plan.</li>
+<li><strong>Macro F1 as the metric:</strong> Treats all classes equally regardless of size, which is appropriate given the imbalance.</li>
+</ul>
+<hr>
+<h2 id="dependencies">Dependencies </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>numpy
+pandas
+matplotlib
+opencv-python (cv2)
+torch
+torchvision
+scikit-learn
+tqdm
+joblib
+Pillow
+</code></pre><hr>
+<h2 id="project-structure">Project Structure </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>project-root/
+├── resources/
+│   └── cloud-images/
+│       └── NASA_GLOBE_CD/
+│           └── downloaded_images/
+│               ├── ClSk/
+│               ├── Ct/
+│               └── &lt;other cloud type dirs&gt;/
+└── notebooks/
+    └── colab_05_eda_visualize_insights_replicate_paper_with_smote.ipynb
+</code></pre><hr>
+<h2 id="next-steps--open-questions">Next Steps / Open Questions </h2>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Evaluate which classifier(s) from the sweep perform best and move to hyperparameter tuning</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Experiment with HOG or LBP features instead of raw pixels</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Investigate whether color channels (HSV or LAB) improve performance</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Consider a lightweight CNN baseline (e.g., a small ResNet or MobileNet fine-tune) to compare against classical models</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Revisit SMOTE on feature-extracted representations (rather than raw pixels) if augmentation coverage is still insufficient</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> Confirm which paper is being replicated and align metric reporting to match paper's evaluation protocol</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> <strong>Pretrained ResNet embeddings as features:</strong> Load a pretrained ResNet18, strip the final FC layer, and pass all images through it to obtain 512-dimensional embeddings per image. Feed these into the existing <code>evaluate_classifiers</code> sweep instead of raw flattened pixels. This replaces 16,384 noisy pixel features with 512 rich visual features (edges, textures, shapes) learned from ImageNet — expected to boost all classifiers in the sweep, especially Logistic Regression. No fine-tuning required; the backbone is frozen and used purely for feature extraction.</li>
+</ul>
+<hr>
+<h1 id="checkpoint-2--transfer-learning--nasa-globe-data-cleaning">Checkpoint 2 — Transfer Learning &amp; NASA GLOBE Data Cleaning </h1>
+<p><strong>Current notebooks:</strong> see table below</p>
+<p>This checkpoint covers the move from classical ML on flat pixels to transfer learning with ResNet18, and a parallel effort to clean the dirty NASA GLOBE dataset using a trained binary classifier.</p>
+<hr>
+<h2 id="why-nasa-globe-images-are-dirty">Why NASA GLOBE Images Are Dirty </h2>
+<p>The NASA GLOBE Observer app asks volunteers to photograph clouds. However, it instructs users to photograph all four cardinal directions (N, E, S, W) plus zenith and nadir — not just the sky. This means a large fraction of images in each labeled folder (e.g. <code>Ac/</code>, <code>Cu/</code>) actually show walls, roads, trees, and ground-level scenes rather than clouds. These images cannot be used for training as-is.</p>
+<hr>
+<h2 id="notebooks-overview">Notebooks Overview </h2>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>remove_non_cloud_images.ipynb</code></td>
+<td>Binary cloud/clear_sky classifier sweep with augmentation-leak fix</td>
+</tr>
+<tr>
+<td><code>fine_tuning_rf_mlp.ipynb</code></td>
+<td>Hyperparameter search for RF and MLP without cross-validation</td>
+</tr>
+<tr>
+<td><code>fine_tuning_rf_mlp_cv.ipynb</code></td>
+<td>Same search using <code>RandomizedSearchCV</code> with <code>AugmentingClassifier</code></td>
+</tr>
+<tr>
+<td><code>resnet18_prediction_distribution.ipynb</code></td>
+<td>EDA: what does fully pretrained ResNet18 predict on cloud images?</td>
+</tr>
+<tr>
+<td><code>resnet18_imagenet_probs_rf_cloud_classifier.ipynb</code></td>
+<td>Option C transfer learning: 1000-dim softmax vectors → Random Forest</td>
+</tr>
+<tr>
+<td><code>resnet18_multihead_512_cloud_classifier.ipynb</code></td>
+<td>Multi-head ResNet18: frozen backbone + new 2-class head trained from scratch</td>
+</tr>
+<tr>
+<td><code>resnet18_cloud_filter_nasa_ac.ipynb</code></td>
+<td>Apply trained model to filter the NASA GLOBE <code>Ac</code> folder</td>
+</tr>
+<tr>
+<td><code>resnet18_cloud_filter_all_classes.ipynb</code></td>
+<td>Apply trained model to all NASA GLOBE folders, export combined CSV</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="1-binary-cloud--clear-sky-classifier-remove_non_cloud_imagesipynb">1. Binary Cloud / Clear Sky Classifier (<code>remove_non_cloud_images.ipynb</code>) </h2>
+<p>A small, clean dataset (<code>cloud-classifier-1/</code>) was assembled with two classes — <code>cloud</code> and <code>clear_sky</code> — to train a binary filter for the dirty NASA GLOBE images.</p>
+<h3 id="augmentation-leak-fix">Augmentation Leak Fix </h3>
+<p>The original notebook augmented data before passing it to <code>cross_val_score</code>, meaning augmented versions of the same image could appear in both the training fold and the validation fold — inflating scores artificially. This was fixed with an <code>AugmentingClassifier</code> wrapper that applies augmentation only inside <code>fit()</code>:</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-class">class</span> <span class="token class-name">AugmentingClassifier</span><span class="token punctuation">(</span>BaseEstimator<span class="token punctuation">,</span> ClassifierMixin<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword keyword-def">def</span> <span class="token function">fit</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> X<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        X_aug<span class="token punctuation">,</span> y_aug <span class="token operator">=</span> self<span class="token punctuation">.</span>_augment<span class="token punctuation">(</span>X<span class="token punctuation">,</span> y<span class="token punctuation">)</span>          <span class="token comment"># augment here, inside the fold</span>
+        self<span class="token punctuation">.</span>base_clf<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_aug<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>X_aug<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> y_aug<span class="token punctuation">)</span>
+    <span class="token keyword keyword-def">def</span> <span class="token function">predict</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> X<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        X_norm <span class="token operator">=</span> X<span class="token punctuation">.</span>astype<span class="token punctuation">(</span>np<span class="token punctuation">.</span>float32<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">255.0</span>        <span class="token comment"># same normalisation as training</span>
+        <span class="token keyword keyword-return">return</span> self<span class="token punctuation">.</span>base_clf<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>X_norm<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>X_norm<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre><p><code>evaluate_classifiers</code> wraps every classifier with <code>AugmentingClassifier</code> before passing it to <code>cross_val_score</code>, so all models benefit from the fix automatically.</p>
+<h3 id="results">Results </h3>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th>Accuracy</th>
+<th>F1 macro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cross-val (5-fold)</td>
+<td>~0.928</td>
+<td>~0.928</td>
+</tr>
+<tr>
+<td>Held-out test set (140 images)</td>
+<td>0.9429</td>
+<td>0.9437</td>
+</tr>
+</tbody>
+</table>
+<p>Random Forest and MLP were the top two classifiers.</p>
+<hr>
+<h2 id="2-hyperparameter-tuning-fine_tuning_rf_mlpipynb--fine_tuning_rf_mlp_cvipynb">2. Hyperparameter Tuning (<code>fine_tuning_rf_mlp.ipynb</code> / <code>fine_tuning_rf_mlp_cv.ipynb</code>) </h2>
+<p>Two tuning notebooks were created in parallel:</p>
+<ul>
+<li><strong><code>fine_tuning_rf_mlp.ipynb</code></strong> — uses <code>ParameterSampler</code> (no CV). Fits on pre-augmented training data and evaluates directly on the test set. Faster on a MacBook; good for quick iteration.</li>
+<li><strong><code>fine_tuning_rf_mlp_cv.ipynb</code></strong> — uses <code>RandomizedSearchCV</code> with <code>AugmentingClassifier</code>. Parameters are prefixed <code>base_clf__</code> to thread through the wrapper. <code>n_jobs=1</code> is set because PyTorch's MPS augmentation is not safe under multiprocessing.</li>
+</ul>
+<p>Random Forest parameter space (MacBook-friendly):</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>rf_param_dist <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">"n_estimators"</span><span class="token punctuation">:</span>           randint<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">"max_depth"</span><span class="token punctuation">:</span>              <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"min_samples_split"</span><span class="token punctuation">:</span>      randint<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">"min_samples_leaf"</span><span class="token punctuation">:</span>       randint<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">"max_features"</span><span class="token punctuation">:</span>           <span class="token punctuation">[</span><span class="token string">"sqrt"</span><span class="token punctuation">,</span> <span class="token string">"log2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"criterion"</span><span class="token punctuation">:</span>              <span class="token punctuation">[</span><span class="token string">"gini"</span><span class="token punctuation">,</span> <span class="token string">"entropy"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"bootstrap"</span><span class="token punctuation">:</span>              <span class="token punctuation">[</span><span class="token boolean">True</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"min_impurity_decrease"</span><span class="token punctuation">:</span>  <span class="token punctuation">[</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.01</span><span class="token punctuation">,</span> <span class="token number">0.05</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre><hr>
+<h2 id="3-resnet18-prediction-distribution-eda-resnet18_prediction_distributionipynb">3. ResNet18 Prediction Distribution EDA (<code>resnet18_prediction_distribution.ipynb</code>) </h2>
+<p>Before training any new heads, all 698 images from <code>cloud-classifier-1/</code> were passed through a fully pretrained ResNet18 (ImageNet 1000-class head intact) to understand what the network natively sees.</p>
+<p><strong>Key finding:</strong> ResNet18 never predicts "cloud" because ImageNet has no cloud class. For sky photos it tends to predict <code>sandbar</code>, <code>seashore</code>, <code>beacon</code>, and <code>geyser</code> — classes that share the same wide-sky + flat-horizon visual structure as a sky photograph. This confirmed that the ImageNet head is useless for our domain, but the backbone features it produces are rich and exploitable.</p>
+<p>Three visualisations:</p>
+<ol>
+<li>Top-15 predicted ImageNet classes per true label (bar chart)</li>
+<li>Sample images with top-3 predictions overlaid</li>
+<li>Top-1 confidence distribution per category</li>
+</ol>
+<hr>
+<h2 id="4-transfer-learning-approaches">4. Transfer Learning Approaches </h2>
+<p>Two architectures were evaluated for binary cloud/clear_sky classification using the pretrained ResNet18 backbone.</p>
+<h3 id="option-c--1000-dim-softmax-features--random-forest-resnet18_imagenet_probs_rf_cloud_classifieripynb">Option C — 1000-dim Softmax Features → Random Forest (<code>resnet18_imagenet_probs_rf_cloud_classifier.ipynb</code>) </h3>
+<p>Images are passed through the full pretrained ResNet18 (head intact). The 1000-dim softmax probability vector for each image is used as the feature vector. A Random Forest is trained on top — no ResNet weights are modified.</p>
+<p><strong>Result: 97.1% accuracy, 0.971 F1 macro</strong> on 140 held-out images.</p>
+<p>Feature importance analysis revealed which ImageNet classes drive the prediction (e.g. sky-adjacent classes like <code>seashore</code>, <code>sandbar</code> signal cloud; more structured object classes signal clear_sky).</p>
+<h3 id="multi-head-resnet18-resnet18_multihead_512_cloud_classifieripynb">Multi-Head ResNet18 (<code>resnet18_multihead_512_cloud_classifier.ipynb</code>) </h3>
+<p>A second linear head (<code>head2</code>) is added on top of the 512-dimensional penultimate backbone features. The backbone and the original ImageNet head (<code>head1</code>) are both frozen. Only <code>head2</code> (1,026 parameters out of ~11 million total) is trained.</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>backbone (frozen) → 512-dim features → head1 (frozen, 1000 classes — ImageNet)
+                                      → head2 (trained,    2 classes — cloud/clear_sky)
+</code></pre><p><strong>Why this works so much better than 12-class cloud type classification:</strong> The binary task (cloud vs no-cloud) maps cleanly onto existing backbone features. The backbone already encodes sky texture, horizon lines, and diffuse luminance from ImageNet training — all of which are sufficient to separate sky from non-sky. Distinguishing 12 fine-grained cloud types requires much subtler texture discrimination that the frozen backbone can't provide without fine-tuning.</p>
+<p><strong>Result after 50 epochs: 100% accuracy, 1.000 F1 macro</strong> on 140 held-out images (genuine — not overfitting; the binary task is simply well-separated in 512-dim feature space).</p>
+<p>The trained model is saved to <code>models/multihead_resnet18_cloud_sky.pth</code>:</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token string">"model_state_dict"</span><span class="token punctuation">:</span>     model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">"optimizer_state_dict"</span><span class="token punctuation">:</span> optimizer<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">"classes"</span><span class="token punctuation">:</span>              <span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token keyword keyword-for">for</span> c <span class="token keyword keyword-in">in</span> ordinal_encoder<span class="token punctuation">.</span>classes_<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"num_classes"</span><span class="token punctuation">:</span>          <span class="token builtin">len</span><span class="token punctuation">(</span>ordinal_encoder<span class="token punctuation">.</span>classes_<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> SAVE_PATH<span class="token punctuation">)</span>
+</code></pre><p><strong>Note on PyTorch 2.6:</strong> <code>torch.load</code> now defaults to <code>weights_only=True</code>. Loading checkpoints that contain numpy strings requires <code>weights_only=False</code>. Classes are saved as plain Python strings (<code>str(c)</code>) rather than numpy strings to avoid this in future.</p>
+<hr>
+<h2 id="5-nasa-globe-data-cleaning">5. NASA GLOBE Data Cleaning </h2>
+<h3 id="ac-folder-filter-resnet18_cloud_filter_nasa_acipynb">Ac Folder Filter (<code>resnet18_cloud_filter_nasa_ac.ipynb</code>) </h3>
+<p>The trained multi-head model (head2) is applied to all 35,627 images in the <code>Ac/</code> folder. Results:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Count</th>
+<th>%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Predicted cloud</td>
+<td>25,679</td>
+<td>72.1%</td>
+</tr>
+<tr>
+<td>Predicted not cloud</td>
+<td>9,948</td>
+<td>27.9%</td>
+</tr>
+<tr>
+<td>Kept (conf ≥ 0.8)</td>
+<td>22,492</td>
+<td>63.1%</td>
+</tr>
+</tbody>
+</table>
+<p>The notebook provides three visualisations:</p>
+<ol>
+<li><strong>Confidence distribution</strong> — histogram of head2 cloud scores across all images</li>
+<li><strong>Not-cloud samples</strong> — 4×4 grid of the lowest-confidence images (ground, trees, walls)</li>
+<li><strong>Borderline samples (0.5–0.8 confidence)</strong> — 4×4 grid showing uncertain images with both head2 cloud score and head1 top ImageNet prediction per image</li>
+</ol>
+<p>Clean filenames are exported to <code>ac_clean_filenames.txt</code>.</p>
+<p><strong>On head1 labels for borderline images:</strong> Head1 (the ImageNet head) never labels these images as "tree" even when trees are visible, because ImageNet has no generic tree class — only hyper-specific species (<code>oak</code>, <code>palm</code>, <code>fig</code>) that only activate when the tree is the centred, dominant subject. For sky photos with edge-of-frame vegetation, the dominant visual signal is still sky, so head1 falls back to outdoor-horizon classes (<code>sandbar</code>, <code>seashore</code>, <code>beacon</code>).</p>
+<h3 id="all-classes-filter-resnet18_cloud_filter_all_classesipynb">All-Classes Filter (<code>resnet18_cloud_filter_all_classes.ipynb</code>) </h3>
+<p>A single notebook that loops over all 11 cloud-type folders (skipping <code>ClSk</code> — clear sky is already the negative class the model was trained on), runs batch inference, and collects everything into one combined DataFrame:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>folder</code></td>
+<td>Cloud type label (e.g. <code>Cu</code>, <code>Ns</code>)</td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>Image filename</td>
+</tr>
+<tr>
+<td><code>cloud_conf</code></td>
+<td>head2 probability of cloud</td>
+</tr>
+<tr>
+<td><code>head2_pred</code></td>
+<td><code>cloud</code> or <code>clear_sky</code></td>
+</tr>
+<tr>
+<td><code>head1_class</code></td>
+<td>Top-1 ImageNet class from head1</td>
+</tr>
+<tr>
+<td><code>head1_conf</code></td>
+<td>head1 top-1 confidence</td>
+</tr>
+</tbody>
+</table>
+<p>Results are exported to a single CSV: <code>resources/cloud-images/NASA_GLOBE_CD/cloud_filter_results.csv</code>. This CSV is the reference for downstream training — join on <code>folder + filename</code> and filter to <code>cloud_conf &gt;= 0.8</code> to get a clean subset of any class.</p>
+<p>A bar chart shows the keep-rate per folder, making it easy to spot which cloud types have the most non-cloud contamination.</p>
+<hr>
+<h2 id="key-design-decisions-1">Key Design Decisions </h2>
+<ul>
+<li><strong>Binary filter before multi-class training:</strong> Cleaning the dataset first means the multi-class model is never exposed to ground/wall/tree images labelled as cloud types.</li>
+<li><strong>CSV reference over file copying:</strong> The filter results are stored as a CSV pointer rather than copying images to a new directory. This is cheaper on disk and fully reversible.</li>
+<li><strong>Multi-head over full fine-tuning:</strong> Only 1,026 parameters are trained. This avoids overfitting on 698 labelled images and runs in minutes on Apple Silicon MPS.</li>
+<li><strong>0.8 confidence threshold:</strong> Chosen to be conservative — prefer a smaller clean dataset over including borderline images that might be ambiguous.</li>
+<li><strong>Skip <code>ClSk</code> in the all-classes filter:</strong> Clear sky is already the negative class head2 was trained on; running the filter over it would be circular.</li>
+</ul>
+<hr>
+<h2 id="project-structure-updated">Project Structure (updated) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>project-root/
+├── models/
+│   └── multihead_resnet18_cloud_sky.pth       ← trained binary classifier
+├── resources/
+│   └── cloud-images/
+│       ├── cloud-classifier-1/                ← clean labelled set (698 images)
+│       │   ├── clear_sky/
+│       │   └── cloud/
+│       └── NASA_GLOBE_CD/
+│           ├── downloaded_images/
+│           │   ├── Ac/  As/  Cb/  Cc/  Ci/
+│           │   ├── ClSk/  Cs/  Ct/  Cu/
+│           │   └── Ns/  Sc/  St/
+│           ├── ac_clean_filenames.txt          ← Ac-only filter output
+│           └── cloud_filter_results.csv        ← all-classes filter output
+└── notebooks/
+    ├── remove_non_cloud_images.ipynb
+    ├── fine_tuning_rf_mlp.ipynb
+    ├── fine_tuning_rf_mlp_cv.ipynb
+    ├── resnet18_prediction_distribution.ipynb
+    ├── resnet18_imagenet_probs_rf_cloud_classifier.ipynb
+    ├── resnet18_multihead_512_cloud_classifier.ipynb
+    ├── resnet18_cloud_filter_nasa_ac.ipynb
+    ├── resnet18_cloud_filter_all_classes.ipynb
+    ├── resnet18_cloud_filter_analysis.ipynb
+    ├── 07_transfer_learning.ipynb
+    └── 08_transfer_learning_filtered.ipynb
+</code></pre><hr>
+<h1 id="checkpoint-3--vit-feature-embeddings-for-11-class-cloud-classification">Checkpoint 3 — ViT Feature Embeddings for 11-Class Cloud Classification </h1>
+<p><strong>Current notebooks:</strong> <code>07_transfer_learning.ipynb</code>, <code>08_transfer_learning_filtered.ipynb</code></p>
+<p>This checkpoint covers the attempt at fine-grained 11-class cloud type classification using a Vision Transformer (ViT-B-16), first on the raw NASA GLOBE images, then repeated on the dataset cleaned by the ResNet18 filter from Checkpoint 2.</p>
+<hr>
+<h2 id="model-vit-b-16-with-swag-weights">Model: ViT-B-16 with SWAG Weights </h2>
+<p><code>vit_b_16</code> from torchvision loaded with <code>IMAGENET1K_SWAG_E2E_V1</code> weights — a stronger pretrained checkpoint than the standard ImageNet-1K weights, trained with weakly-supervised data. Input size is fixed at <strong>384×384</strong> by these weights.</p>
+<p>The ImageNet classification head is replaced with a new head:</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>model<span class="token punctuation">.</span>heads <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Dropout<span class="token punctuation">(</span>p<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">768</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre><p>The entire encoder is frozen. Only the 11-class head is trained (~8,459 parameters out of ~86 million total).</p>
+<hr>
+<h2 id="feature-embedding-and-caching">Feature Embedding and Caching </h2>
+<p>Rather than running full forward passes through the ViT encoder on every training epoch, features are extracted once from the frozen encoder and cached to disk. Training then operates entirely on the cached embeddings.</p>
+<p>The class token output (<code>x[:, 0]</code>) from the ViT encoder is used as the 768-dimensional embedding for each image:</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-def">def</span> <span class="token function">extract_features</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> loader<span class="token punctuation">,</span> device<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-with">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword keyword-for">for</span> imgs<span class="token punctuation">,</span> labels <span class="token keyword keyword-in">in</span> loader<span class="token punctuation">:</span>
+            x <span class="token operator">=</span> model<span class="token punctuation">.</span>_process_input<span class="token punctuation">(</span>imgs<span class="token punctuation">)</span>
+            batch_class_token <span class="token operator">=</span> model<span class="token punctuation">.</span>class_token<span class="token punctuation">.</span>expand<span class="token punctuation">(</span>x<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+            x <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>batch_class_token<span class="token punctuation">,</span> x<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+            x <span class="token operator">=</span> model<span class="token punctuation">.</span>encoder<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+            features <span class="token operator">=</span> x<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span>   <span class="token comment"># 768-dim class token output</span>
+</code></pre><p>Cached splits are saved as <code>cached_features/train.pt</code>, <code>val.pt</code>, <code>test.pt</code> (notebook 07) and <code>cached_features_filtered/</code> (notebook 08). The cache is only recomputed if the files don't exist.</p>
+<p><strong>Why cache?</strong> Feature extraction through ViT at 384×384 is slow (~minutes per epoch if done inline). Caching reduces each training epoch to a few seconds of linear head forward+backward passes on 768-dim vectors, making 300-epoch runs practical on a MacBook.</p>
+<hr>
+<h2 id="data-pipeline">Data Pipeline </h2>
+<ul>
+<li><strong>Split:</strong> 80% train / 10% val / 10% test, stratified by class (<code>StratifiedShuffleSplit</code>)</li>
+<li><strong>Max per class:</strong> 3,000 images</li>
+<li><strong>Class imbalance:</strong> handled with <code>WeightedRandomSampler</code> — each class is sampled proportionally so the head sees a balanced stream regardless of raw class sizes</li>
+<li><strong>Augmentation:</strong> applied during feature extraction (train split only), including wrap/border translation, random flips, rotation, scale, and resized crop</li>
+<li><strong>Classes:</strong> 11 cloud types (Ac, As, Cb, Cc, Ci, Cs, Ct, Cu, Ns, Sc, St) — <code>ClSk</code> excluded</li>
+</ul>
+<hr>
+<h2 id="training">Training </h2>
+<ul>
+<li><strong>Optimiser:</strong> AdamW (default learning rate)</li>
+<li><strong>Loss:</strong> CrossEntropyLoss</li>
+<li><strong>Epochs:</strong> up to 300 with early stopping (patience=100)</li>
+<li><strong>Checkpoint:</strong> best validation accuracy saved to <code>best_model.pt</code> / <code>best_model_filtered.pt</code></li>
+</ul>
+<hr>
+<h2 id="results-1">Results </h2>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>Dataset</th>
+<th>Test accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>07_transfer_learning.ipynb</code></td>
+<td>Raw NASA GLOBE (dirty)</td>
+<td><strong>47.5%</strong></td>
+</tr>
+<tr>
+<td><code>08_transfer_learning_filtered.ipynb</code></td>
+<td>Filtered via ResNet18 CSV</td>
+<td>TBD</td>
+</tr>
+</tbody>
+</table>
+<p>The 47.5% baseline on dirty data is the reference. The filtered run (notebook 08) is the first attempt to quantify how much the data cleaning improves the result.</p>
+<hr>
+<h2 id="why-475-is-hard-to-beat-with-a-frozen-encoder">Why 47.5% Is Hard to Beat with a Frozen Encoder </h2>
+<p>Two factors compound here:</p>
+<ol>
+<li>
+<p><strong>Domain mismatch:</strong> ViT was trained on ImageNet objects. Its class token embedding encodes object-level concepts (shape, colour, texture of distinct foreground subjects). Cloud images have no distinct foreground subject — the discriminating signal is diffuse texture, luminance gradients, and macro structure (wispy vs layered vs puffy). These are not the features ImageNet training emphasised.</p>
+</li>
+<li>
+<p><strong>Fine-grained class similarity:</strong> Several cloud types are visually similar even to expert human eyes (Ac vs Cc, Cs vs As, Sc vs St). A frozen encoder trained on 1000 dissimilar ImageNet objects will not naturally separate these.</p>
+</li>
+</ol>
+<p>The data cleaning addresses the noise problem (dirty labels) but not the representational problem (frozen features). Meaningful further improvement likely requires unfreezing deeper encoder layers, which is compute-bound and better suited to cloud compute (AWS).</p>
+<hr>
+<h2 id="key-design-decisions-2">Key Design Decisions </h2>
+<ul>
+<li><strong>Cache features, not images:</strong> 768-dim cached embeddings reduce a 300-epoch run from hours to minutes without changing the result.</li>
+<li><strong>Separate cache directories:</strong> <code>cached_features/</code> and <code>cached_features_filtered/</code> keep the two runs independent so results can be compared directly.</li>
+<li><strong><code>Ct</code> threshold set to 0.0:</strong> Contrails only had 200 images in the NASA GLOBE dataset and only 14% passed the 0.9 threshold used elsewhere. Rather than losing this class entirely, all 200 images are included regardless of filter confidence.</li>
+<li><strong><code>ClSk</code> excluded:</strong> The 11-class task is cloud type identification; clear sky is not a cloud type and is not in the training set.</li>
+</ul>
+<hr>
+<h1 id="checkpoint-4--filtered-dataset-sampling-strategy--gradual-unfreezing">Checkpoint 4 — Filtered Dataset, Sampling Strategy &amp; Gradual Unfreezing </h1>
+<p><strong>Current notebooks:</strong> <code>08_transfer_learning_filtered.ipynb</code>, <code>08_1_transfer_learning_filtered.ipynb</code>, <code>08_2_transfer_learning_filtered.ipynb</code>, <code>colab_09_transfer_learning_filtered.ipynb</code>, <code>colab_10_transfer_learning_poc_unfreeze.ipynb</code>, <code>colab_11_transfer_learning_gradual_unfreeze.ipynb</code></p>
+<p>This checkpoint covers: standardising the filter CSV, building a clean filtered image extract, comparing sampling strategies for cached-embedding training, establishing why end-to-end ViT training must run on Colab, and designing a gradual-unfreezing curriculum for the Colab notebooks.</p>
+<hr>
+<h2 id="1-csv-column-standardisation">1. CSV Column Standardisation </h2>
+<p>The all-classes filter CSV (<code>cloud_filter_results.csv</code>) was saved with inconsistent column names across different runs. The canonical naming convention going forward is:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>folder</code></td>
+<td>Cloud type label (<code>Ac</code>, <code>Cu</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>Image filename</td>
+</tr>
+<tr>
+<td><code>head2_pred</code></td>
+<td>Binary prediction: <code>cloud</code> or <code>clear_sky</code></td>
+</tr>
+<tr>
+<td><code>head2_conf</code></td>
+<td>head2 softmax probability for <code>cloud</code> (0 = clear_sky, 1 = cloud)</td>
+</tr>
+<tr>
+<td><code>head1_pred</code></td>
+<td>Top-1 ImageNet class from the frozen ResNet18 head1</td>
+</tr>
+<tr>
+<td><code>head1_conf</code></td>
+<td>head1 top-1 confidence</td>
+</tr>
+</tbody>
+</table>
+<p>The first clean export under this convention is saved as <code>cloud_filter_results_1.csv</code>. All downstream notebooks reference this file. A rename shim (<code>df.rename(columns={"cloud_conf": "head2_conf", ...})</code>) is applied at load time in any notebook that may encounter the old column names.</p>
+<hr>
+<h2 id="2-per-class-visual-analysis-resnet18_cloud_filter_analysisipynb">2. Per-Class Visual Analysis (<code>resnet18_cloud_filter_analysis.ipynb</code>) </h2>
+<p>A standalone analysis notebook that loads <code>cloud_filter_results_1.csv</code> and generates four visualisations per cloud class:</p>
+<ol>
+<li><strong>head2 confidence distribution</strong> — histogram with threshold and 0.5 lower-bound markers</li>
+<li><strong>Not-cloud samples</strong> — 4×4 grid sorted by lowest head2 confidence</li>
+<li><strong>Borderline samples (0.5–threshold)</strong> — random sample from the uncertain band</li>
+<li><strong>High-confidence cloud samples</strong> — 4×4 grid sorted by highest head2 confidence</li>
+</ol>
+<p>Both <code>head2_pred/head2_conf</code> and <code>head1_pred/head1_conf</code> are shown in each image subtitle, allowing side-by-side comparison of the binary filter and the ImageNet backbone predictions.</p>
+<p>Per-class thresholds used throughout:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Threshold</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ac, As, Cb, Cc, Ci, Cs, Cu, Ns, Sc, St</td>
+<td>0.8</td>
+<td>Conservative cutoff</td>
+</tr>
+<tr>
+<td>Ct</td>
+<td>0.0</td>
+<td>Only 200 images total — include all</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-filtered-image-extract-_new_dataset_minifieripynb">3. Filtered Image Extract (<code>_new_dataset_minifier.ipynb</code>) </h2>
+<p>Rather than selecting images by CSV lookup at training time, a physical copy of the filtered dataset is built once and reused:</p>
+<ul>
+<li>Reads <code>cloud_filter_results_1.csv</code>, applies per-class thresholds</li>
+<li>For each class, <strong>randomly samples</strong> up to 3,000 images from the full <code>[threshold, 1.0]</code> confidence range (<code>random_state=42</code>)</li>
+<li>Copies selected images to <code>resources/cloud-images/NASA_GLOBE_CD/extract_filtered/</code> preserving the per-class folder structure</li>
+<li>Raises <code>FileExistsError</code> if the destination already exists (prevents accidental overwrites)</li>
+</ul>
+<p><strong>Why random sample across the full confidence range rather than top-N?</strong> Taking only the highest-confidence images (alphabetical <code>.head()</code> or sorted) creates a biased subset skewed toward easy, visually obvious examples. Sampling across the full 0.8–1.0 range includes harder boundary cases that may help generalisation.</p>
+<p><strong>Resulting dataset:</strong> 10 × 3,000 + 200 (Ct) = <strong>30,200 images</strong></p>
+<hr>
+<h2 id="4-cached-embedding-variants-local--notebooks-08--08_1--08_2">4. Cached Embedding Variants (Local — Notebooks 08 / 08_1 / 08_2) </h2>
+<p>Three variants of the cached-embedding training notebook were produced to isolate the effect of image selection strategy vs training noise:</p>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>Image selection</th>
+<th><code>random_state</code></th>
+<th>Cache dir</th>
+<th>Checkpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>08_transfer_learning_filtered.ipynb</code></td>
+<td>random sample</td>
+<td>42</td>
+<td><code>cached_features_filtered_v2/</code></td>
+<td><code>best_model_filtered.pt</code></td>
+</tr>
+<tr>
+<td><code>08_1_transfer_learning_filtered.ipynb</code></td>
+<td>alphabetical (<code>.head()</code>)</td>
+<td>42</td>
+<td><code>cached_features_filtered/</code></td>
+<td><code>best_model_filtered_alphabetical.pt</code></td>
+</tr>
+<tr>
+<td><code>08_2_transfer_learning_filtered.ipynb</code></td>
+<td>random sample</td>
+<td>0</td>
+<td><code>cached_features_filtered_v3/</code></td>
+<td><code>best_model_filtered_seed0.pt</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key finding:</strong> Confidence distribution analysis showed means within 0.005 of each other across all classes between alphabetical and random selection. The ~3% accuracy difference observed between notebook 08 and 08_1 is attributable to training noise rather than a real effect of sampling strategy. Notebook 08_2 (seed=0) was created to test this hypothesis with a different split seed.</p>
+<p><strong>Cache invalidation:</strong> Each notebook checks for the existence of <code>{FEATURES_PATH}/train.pt</code>. If the directory is wiped, the extraction cell re-runs automatically. A utility cell in 08_2 (<code>shutil.rmtree(FEATURES_PATH)</code>) allows on-demand cache clearing.</p>
+<p><strong>Note on <code>num_workers</code>:</strong> The <code>T.Lambda</code> in the augmentation pipeline cannot be pickled by Python's multiprocessing spawn context (macOS default). All DataLoaders use <code>num_workers=0</code> locally.</p>
+<hr>
+<h2 id="5-why-end-to-end-vit-training-must-run-on-colab">5. Why End-to-End ViT Training Must Run on Colab </h2>
+<p>Notebooks <code>09_transfer_learning_e2e_filtered.ipynb</code> and <code>09_1_transfer_learning_e2e_filtered.ipynb</code> attempt full end-to-end ViT-B-16 fine-tuning locally. A single epoch (21k images × 384×384, batch=32, <code>num_workers=0</code>) took over 86 minutes on Apple Silicon MPS without completing — making 300-epoch runs infeasible locally.</p>
+<p>Root causes:</p>
+<ul>
+<li><strong><code>num_workers=0</code></strong> — all JPEG decoding, resizing (384×384), and augmentation runs in the main process, starving the GPU between batches</li>
+<li><strong>Full 86M-parameter backprop on MPS</strong> — MPS attention op throughput is significantly lower than CUDA; each backward pass takes several seconds</li>
+</ul>
+<p>The correct local approach remains the cached-embedding route (notebooks 08/08_1/08_2): extract once (~30 min), then each epoch is 2–5 seconds. End-to-end training is reserved for Colab GPU sessions.</p>
+<hr>
+<h2 id="6-colab-notebook-family">6. Colab Notebook Family </h2>
+<p>All Colab notebooks are based on <code>colab_06_1_transfer_learning.ipynb</code> (uses <code>IMAGENET1K_SWAG_LINEAR_V1</code> weights, <code>CUDA_LAUNCH_BLOCKING=1</code>, tqdm progress bars inside the train loop).</p>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>colab_09_transfer_learning_filtered.ipynb</code></td>
+<td>Direct port of <code>colab_06_1</code> to <code>extract_filtered/</code> — heads-only training, 30 × 10 epochs</td>
+</tr>
+<tr>
+<td><code>colab_10_transfer_learning_poc_unfreeze.ipynb</code></td>
+<td>Proof-of-concept gradual unfreezing — 10/5/5 epochs, no early stopping</td>
+</tr>
+<tr>
+<td><code>colab_11_transfer_learning_gradual_unfreeze.ipynb</code></td>
+<td>Full gradual unfreezing — 100/50/30 max epochs with early stopping per phase</td>
+</tr>
+</tbody>
+</table>
+<p>The only changes from <code>colab_06_1</code> in <code>colab_09</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th><code>colab_06_1</code></th>
+<th><code>colab_09</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unzipped_images_dir</code></td>
+<td><code>extract</code></td>
+<td><code>extract_filtered</code></td>
+</tr>
+<tr>
+<td><code>zip_path</code></td>
+<td><code>extract.zip</code></td>
+<td><code>extract_filtered.zip</code></td>
+</tr>
+<tr>
+<td><code>expected_image_count</code></td>
+<td>30559</td>
+<td>30200</td>
+</tr>
+<tr>
+<td><code>IMAGES_PATH</code></td>
+<td><code>extract</code></td>
+<td><code>extract_filtered</code></td>
+</tr>
+<tr>
+<td><code>n_classes</code> / <code>num_classes</code></td>
+<td>12</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-gradual-unfreezing-strategy-colab-10--11">7. Gradual Unfreezing Strategy (Colab 10 &amp; 11) </h2>
+<p>ViT-B-16 has 12 transformer encoder layers (<code>model.encoder.layers[0]–[11]</code>). The standard approach is to unfreeze from the top down — the last layers are most task-specific and adapt fastest. Three phases:</p>
+<p><strong>Phase 1 — heads only</strong></p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>AdamW<span class="token punctuation">(</span>model<span class="token punctuation">.</span>heads<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">1e-3</span><span class="token punctuation">)</span>
+</code></pre><p><strong>Phase 2 — unfreeze last encoder block (layer 11)</strong></p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-for">for</span> param <span class="token keyword keyword-in">in</span> model<span class="token punctuation">.</span>encoder<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    param<span class="token punctuation">.</span>requires_grad <span class="token operator">=</span> <span class="token boolean">True</span>
+
+optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>AdamW<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span><span class="token string">"params"</span><span class="token punctuation">:</span> model<span class="token punctuation">.</span>heads<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>              <span class="token string">"lr"</span><span class="token punctuation">:</span> <span class="token number">1e-4</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"params"</span><span class="token punctuation">:</span> model<span class="token punctuation">.</span>encoder<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"lr"</span><span class="token punctuation">:</span> <span class="token number">1e-5</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre><p><strong>Phase 3 — unfreeze last 4 encoder blocks (layers 8–11)</strong></p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-for">for</span> layer <span class="token keyword keyword-in">in</span> model<span class="token punctuation">.</span>encoder<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>  <span class="token comment"># layers 8, 9, 10</span>
+    <span class="token keyword keyword-for">for</span> param <span class="token keyword keyword-in">in</span> layer<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        param<span class="token punctuation">.</span>requires_grad <span class="token operator">=</span> <span class="token boolean">True</span>
+
+optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>AdamW<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span><span class="token string">"params"</span><span class="token punctuation">:</span> model<span class="token punctuation">.</span>heads<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                                           <span class="token string">"lr"</span><span class="token punctuation">:</span> <span class="token number">1e-4</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"params"</span><span class="token punctuation">:</span> model<span class="token punctuation">.</span>encoder<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                              <span class="token string">"lr"</span><span class="token punctuation">:</span> <span class="token number">1e-5</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">"params"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>p <span class="token keyword keyword-for">for</span> l <span class="token keyword keyword-in">in</span> model<span class="token punctuation">.</span>encoder<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword keyword-for">for</span> p <span class="token keyword keyword-in">in</span> l<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token string">"lr"</span><span class="token punctuation">:</span> <span class="token number">5e-6</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre><p><strong>LR rationale:</strong> Each newly unfrozen group gets a 10× smaller LR than the previous phase. Pretrained weights are valuable; small gradients adjust them without destroying the representations learned during ImageNet training. Going deeper than the last 4 blocks is rarely worth it for a classification task of this scale.</p>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>Phase 1</th>
+<th>Phase 2</th>
+<th>Phase 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>colab_10</code> (PoC)</td>
+<td>10 epochs</td>
+<td>5 epochs</td>
+<td>5 epochs</td>
+</tr>
+<tr>
+<td><code>colab_11</code> (full)</td>
+<td>100 epochs, patience 20</td>
+<td>50 epochs, patience 15</td>
+<td>30 epochs, patience 10</td>
+</tr>
+</tbody>
+</table>
+<p><code>colab_11</code> saves a checkpoint at each phase (<code>best_model_phase{1,2,3}.pt</code>) and restores the best weights before moving to the next phase. The plot cell at the end renders all three phases on a single continuous axis with colour-coded train/val curves.</p>
+<hr>
+<h2 id="key-design-decisions-3">Key Design Decisions </h2>
+<ul>
+<li><strong>Random sampling across full confidence range:</strong> Avoids selection bias toward the easiest images, at the cost of including harder borderline examples that test generalisation.</li>
+<li><strong>Physical copy (<code>extract_filtered/</code>) rather than CSV lookup at training time:</strong> Simplifies the Colab data pipeline — zip the directory, upload to Drive, extract. No CSV dependency at runtime.</li>
+<li><strong><code>colab_06_1</code> as the Colab base (not <code>colab_06</code>):</strong> <code>colab_06_1</code> uses <code>IMAGENET1K_SWAG_LINEAR_V1</code> (224×224 linear probe weights) rather than <code>E2E_V1</code> (384×384 end-to-end weights), and includes <code>CUDA_LAUNCH_BLOCKING=1</code> for stable CUDA error reporting.</li>
+<li><strong>Discriminative learning rates across unfreezing phases:</strong> Rather than a single global LR for all unfrozen layers, each layer group gets its own LR (1e-4 / 1e-5 / 5e-6). Earlier layers get smaller LRs to preserve low-level features while allowing higher layers to specialise.</li>
+<li><strong><code>Ct</code> handled by <code>WeightedRandomSampler</code>:</strong> With only 200 Ct images vs 3,000 for other classes, the sampler gives Ct images ~15× the sampling weight. Each Ct image is seen ~15 times per epoch with fresh augmentation, providing variation despite the small pool.</li>
+</ul>
+<hr>
+<h2 id="project-structure-updated-1">Project Structure (updated) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>project-root/
+├── models/
+│   └── multihead_resnet18_cloud_sky.pth
+├── resources/
+│   └── cloud-images/
+│       └── NASA_GLOBE_CD/
+│           ├── downloaded_images/          ← original raw images
+│           ├── extract_filtered/           ← filtered copy (30,200 images)
+│           │   ├── Ac/  As/  Cb/  Cc/  Ci/
+│           │   ├── Cs/  Ct/  Cu/  Ns/
+│           │   └── Sc/  St/
+│           ├── cloud_filter_results.csv    ← original filter output
+│           └── cloud_filter_results_1.csv  ← canonical filter CSV (standardised columns)
+└── notebooks/
+    ├── _new_dataset_minifier.ipynb
+    ├── resnet18_cloud_filter_analysis.ipynb
+    ├── 08_transfer_learning_filtered.ipynb         ← cached, random sample, seed=42
+    ├── 08_1_transfer_learning_filtered.ipynb       ← cached, alphabetical
+    ├── 08_2_transfer_learning_filtered.ipynb       ← cached, random sample, seed=0
+    ├── 09_transfer_learning_e2e_filtered.ipynb     ← end-to-end local (impractical)
+    ├── 09_1_transfer_learning_e2e_filtered.ipynb   ← end-to-end local, dir-scan loader
+    ├── colab_09_transfer_learning_filtered.ipynb   ← Colab, heads only
+    ├── colab_10_transfer_learning_poc_unfreeze.ipynb   ← Colab, PoC unfreezing
+    └── colab_11_transfer_learning_gradual_unfreeze.ipynb ← Colab, full unfreezing
+</code></pre><hr>
+<h1 id="checkpoint-5--gpu-training-overfitting-analysis--regularisation">Checkpoint 5 — GPU Training, Overfitting Analysis &amp; Regularisation </h1>
+<p><strong>Current notebooks:</strong> <code>colab_11_1</code>, <code>colab_11_2</code>, <code>colab_11_3</code></p>
+<p>This checkpoint covers: bug fixes discovered during Colab runs, end-to-end training results on L4 and A100 GPUs, overfitting analysis, and a regularised variant.</p>
+<hr>
+<h2 id="1-bug-fixes">1. Bug Fixes </h2>
+<h3 id="weightedrandomsampler-not-wired-up">WeightedRandomSampler not wired up </h3>
+<p><code>WeightedRandomSampler</code> was defined in the DataLoader cell but never passed to <code>DataLoader</code> — <code>shuffle=True</code> was used instead. This meant Ct (only 140 training images) was never oversampled. Fixed in <code>colab_09</code>, <code>colab_10</code>, <code>colab_11</code>, <code>colab_11_1</code>, <code>colab_11_2</code>, <code>colab_11_3</code>:</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token comment"># before</span>
+train_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>train_set<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># after</span>
+train_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>train_set<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">,</span> sampler<span class="token operator">=</span>sampler<span class="token punctuation">)</span>
+</code></pre><h3 id="tlambda-pickling-error-python-312--forkserver">T.Lambda pickling error (Python 3.12 / forkserver) </h3>
+<p>Python 3.12 changed the default multiprocessing start method on Linux to <code>forkserver</code>, which requires all DataLoader worker arguments to be picklable. <code>T.Lambda(lambda ...)</code> is not picklable. Replaced with a named class in all Colab notebooks:</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-class">class</span> <span class="token class-name">WrapTranslation</span><span class="token punctuation">:</span>
+    <span class="token keyword keyword-def">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> max_frac<span class="token punctuation">)</span><span class="token punctuation">:</span> self<span class="token punctuation">.</span>max_frac <span class="token operator">=</span> max_frac
+    <span class="token keyword keyword-def">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        h<span class="token punctuation">,</span> w <span class="token operator">=</span> x<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> x<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+        shift_h <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token operator">-</span><span class="token builtin">int</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>max_frac <span class="token operator">*</span> h<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>max_frac <span class="token operator">*</span> h<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        shift_w <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token operator">-</span><span class="token builtin">int</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>max_frac <span class="token operator">*</span> w<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>max_frac <span class="token operator">*</span> w<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> torch<span class="token punctuation">.</span>roll<span class="token punctuation">(</span>x<span class="token punctuation">,</span> shifts<span class="token operator">=</span><span class="token punctuation">(</span>shift_h<span class="token punctuation">,</span> shift_w<span class="token punctuation">)</span><span class="token punctuation">,</span> dims<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre><p>Despite this fix, <code>num_workers &gt; 0</code> still triggers <code>AssertionError: can only test a child process</code> during DataLoader teardown on Colab. All Colab notebooks use <code>num_workers=0</code>.</p>
+<hr>
+<h2 id="2-colab_09-frozen-baseline-results-l4">2. colab_09 Frozen Baseline Results (L4) </h2>
+<p>4 runs × 10 epochs (40 total epochs), heads-only, <code>IMAGENET1K_SWAG_LINEAR_V1</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th>Test accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.3263</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.3265</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.3280</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.3180</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusion:</strong> Frozen encoder ceiling confirmed at ~33%. Consistent across runs — this is a structural limit, not noise. Unfreezing is required to progress.</p>
+<hr>
+<h2 id="3-colab_10-poc-unfreezing-results-l4-20-minepoch">3. colab_10 PoC Unfreezing Results (L4, ~20 min/epoch) </h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Best val</th>
+<th>Train at stop</th>
+<th>Epochs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 1 — heads only</td>
+<td>0.3490</td>
+<td>~0.41</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Phase 2 — + layers[-1]</td>
+<td>0.3702</td>
+<td>~0.45</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Phase 3 — + layers[-4:]</td>
+<td>~0.36</td>
+<td>~0.52</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Test accuracy</strong></td>
+<td><strong>0.3707</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Phase 2 produced a clear jump (+4pp over frozen baseline). Phase 3 showed early overfitting. No early stopping or checkpointing in this PoC notebook.</p>
+<hr>
+<h2 id="4-colab_11_2-full-run-results-a100-bfloat16-batch_size128-5-minepoch">4. colab_11_2 Full Run Results (A100, bfloat16, batch_size=128, ~5 min/epoch) </h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Best val</th>
+<th>Train at stop</th>
+<th>Gap</th>
+<th>Epochs to stop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 1 — heads only</td>
+<td>0.3490</td>
+<td>~0.43</td>
+<td>~8%</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Phase 2 — + layers[-1]</td>
+<td>0.3755</td>
+<td>~0.60</td>
+<td>~22%</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Phase 3 — + layers[-4:]</td>
+<td><strong>0.3755</strong></td>
+<td>~0.68</td>
+<td>~30%</td>
+<td>15</td>
+</tr>
+<tr>
+<td><strong>Test accuracy</strong></td>
+<td><strong>0.3626</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key finding: Phase 3 gave zero val improvement over Phase 2.</strong> Unfreezing 4 blocks only added overfitting (30% train/val gap) without moving the ceiling. The model memorised training data but could not generalise further.</p>
+<hr>
+<h2 id="5-overfitting-analysis">5. Overfitting Analysis </h2>
+<p>The 30% train/val gap in Phase 3 indicates the model has more capacity than the data can support. Root causes:</p>
+<ul>
+<li><strong>Dataset size:</strong> 30,200 images (~21,000 train) is insufficient for fine-grained 11-class cloud classification with a 28M-parameter model</li>
+<li><strong>Inter-class ambiguity:</strong> Several cloud types (Ac/Cc, Cs/As, Sc/St) are visually similar even to experts; the model cannot reliably discriminate them with the available training signal</li>
+<li><strong>Ct constraint:</strong> Only 200 total Ct images (140 train). Despite WeightedRandomSampler's 15× oversampling, the variety is fundamentally limited</li>
+</ul>
+<p><strong>Data scaling analysis:</strong> The current dataset uses 3,000 images/class at a 0.99 confidence threshold. Pool sizes at this threshold:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Pool at 0.99</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cb</td>
+<td>4,617 ← bottleneck</td>
+</tr>
+<tr>
+<td>Cc</td>
+<td>5,500</td>
+</tr>
+<tr>
+<td>Cs</td>
+<td>7,039</td>
+</tr>
+<tr>
+<td>Ci</td>
+<td>8,692</td>
+</tr>
+<tr>
+<td>others</td>
+<td>8,354–58,460</td>
+</tr>
+<tr>
+<td>Ct</td>
+<td>200 ← hard ceiling</td>
+</tr>
+</tbody>
+</table>
+<p>Lowering the threshold to 0.95 would unlock significantly more images for the bottleneck classes. Target: 5,000–10,000 images/class, which is the typical range where ViT fine-tuning generalises well.</p>
+<hr>
+<h2 id="6-notebook-variants">6. Notebook Variants </h2>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>GPU</th>
+<th>Key differences from colab_11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>colab_11_transfer_learning_gradual_unfreeze.ipynb</code></td>
+<td>L4</td>
+<td>Baseline full run</td>
+</tr>
+<tr>
+<td><code>colab_11_1_transfer_learning_gradual_unfreeze_shm.ipynb</code></td>
+<td>L4</td>
+<td>Images extracted to <code>/dev/shm</code> (RAM-backed)</td>
+</tr>
+<tr>
+<td><code>colab_11_2_transfer_learning_gradual_unfreeze_a100.ipynb</code></td>
+<td>A100</td>
+<td>bfloat16 AMP, batch_size=128</td>
+</tr>
+<tr>
+<td><code>colab_11_3_transfer_learning_gradual_unfreeze_regularised.ipynb</code></td>
+<td>A100</td>
+<td>+ label_smoothing=0.1, weight_decay=0.05</td>
+</tr>
+</tbody>
+</table>
+<h3 id="devshm-colab_11_1">/dev/shm (colab_11_1) </h3>
+<p>Extracts the zip to <code>/dev/shm</code> (RAM filesystem) instead of <code>/content</code> (SSD). With <code>num_workers=0</code> the benefit is minimal — CPU transforms dominate loading time, not disk reads. Would matter more if workers were available.</p>
+<h3 id="bfloat16-amp-colab_11_2">bfloat16 AMP (colab_11_2) </h3>
+<p>A100 Tensor Cores are optimised for bfloat16. Wrapping forward pass and loss in <code>torch.autocast(device_type='cuda', dtype=torch.bfloat16)</code> gives significant speedup with no GradScaler needed (bfloat16 has better numerical range than float16). Epoch time: ~5 min vs ~20 min on L4.</p>
+<h3 id="regularisation-colab_11_3">Regularisation (colab_11_3) </h3>
+<p>Two changes targeting the overfitting:</p>
+<ul>
+<li><code>nn.CrossEntropyLoss(label_smoothing=0.1)</code> — softens targets, penalises overconfident predictions</li>
+<li><code>weight_decay=0.05</code> on all AdamW optimisers (up from default 0.01)</li>
+</ul>
+<p>Results pending.</p>
+<hr>
+<h2 id="key-design-decisions-4">Key Design Decisions </h2>
+<ul>
+<li><strong>Phase 3 may not be worth running:</strong> colab_11_2 showed Phase 3 adds no val improvement over Phase 2 while dramatically increasing overfitting. Future runs should consider stopping at Phase 2 and investing compute in more data instead.</li>
+<li><strong>More data is a higher-priority fix than regularisation:</strong> The train/val gap is a data problem. Regularisation (colab_11_3) is worth trying but unlikely to break through the ~0.38 ceiling without more training examples.</li>
+<li><strong>A100 &gt; L4 for this workload:</strong> 4× speedup per epoch (5 min vs 20 min) makes the full 100/50/30 epoch budget practical. bfloat16 is free accuracy-wise.</li>
+</ul>
+<hr>
+<h2 id="project-structure-updated-2">Project Structure (updated) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>notebooks/
+├── colab_09_transfer_learning_filtered.ipynb
+├── colab_10_transfer_learning_poc_unfreeze.ipynb
+├── colab_11_transfer_learning_gradual_unfreeze.ipynb
+├── colab_11_1_transfer_learning_gradual_unfreeze_shm.ipynb       ← /dev/shm extraction
+├── colab_11_2_transfer_learning_gradual_unfreeze_a100.ipynb      ← A100, bfloat16
+└── colab_11_3_transfer_learning_gradual_unfreeze_regularised.ipynb ← label smooth + wd
+</code></pre><hr>
+<h1 id="checkpoint-6--cnn-backbone-selection-replicating-paper-figure-7">Checkpoint 6 — CNN Backbone Selection (Replicating Paper Figure 7) </h1>
+<p><strong>Current notebook:</strong> <code>13_transfer_learning_densenet121_swimcat.ipynb</code></p>
+<p>This checkpoint replicates the backbone selection experiment from <em>CloudDenseNet: Lightweight Ground-Based Cloud Classification</em> (Li et al., Sensors 2023). Before designing their CloudDenseNet architecture, the paper benchmarked 9 CNN backbones under identical conditions to justify their choice of DenseNet121.</p>
+<hr>
+<h2 id="experiment-setup">Experiment Setup </h2>
+<p>The paper trained all 9 models on SWIMCAT — a small, clean dataset of 784 ground-based sky images across 5 broad categories (clear sky, patterned clouds, thick dark clouds, thick white clouds, veil clouds). It was chosen specifically because it's lightweight enough to benchmark multiple architectures quickly.</p>
+<p>All models used identical settings:</p>
+<ul>
+<li>ImageNet pre-trained weights</li>
+<li>Backbone fully frozen — only the classification head trained</li>
+<li>Same hyperparameters across all models</li>
+</ul>
+<p>The paper used a 50/50 train/test split with no validation set. This notebook uses a 70/20/10 split to retain a validation set for early stopping, which is a strictly better setup — the results aren't directly comparable to the paper's 95.51% but are close enough to validate the implementation.</p>
+<p><strong>Note:</strong> This notebook uses <strong>SWIMCAT-extend</strong> (not the original SWIMCAT). SWIMCAT-extend is an expanded version of the dataset with 2,100 images across 6 categories (the original 5 plus F-Veil Clouds), with 350 images per class. The dataset is located at <code>resources/cloud-images/Swimcat-extend/</code>.</p>
+<hr>
+<h2 id="results-2">Results </h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Best val accuracy</td>
+<td><strong>0.9810</strong> (epoch 47)</td>
+</tr>
+<tr>
+<td>Test accuracy</td>
+<td><strong>0.9762</strong></td>
+</tr>
+<tr>
+<td>Early stop epoch</td>
+<td>67 (patience 20)</td>
+</tr>
+</tbody>
+</table>
+<p>Training converged fast: 93.3% val by epoch 3, 95%+ by epoch 7. The model essentially plateaued in the 97–98% range from epoch 47 onwards with no further improvement.</p>
+<p>Train/val gap was negligible (~97.5% train vs 98.1% val at peak) — no overfitting. The frozen backbone + linear head is well regularised for a small clean dataset of this size.</p>
+<p><strong>Comparison to paper:</strong> The paper reports 95.51% for DenseNet121 on the original SWIMCAT with a 50/50 split. Our 97.62% test accuracy on SWIMCAT-extend with a stricter 70/20/10 split is consistent with and exceeds that result, validating the implementation. The higher accuracy is likely a combination of the larger dataset (2,100 vs 784 images) and the cleaner 6-class taxonomy of SWIMCAT-extend.</p>
+<hr>
+<h2 id="key-design-decisions-5">Key Design Decisions </h2>
+<ul>
+<li><strong>Plain shuffle over <code>WeightedRandomSampler</code>:</strong> SWIMCAT-extend is perfectly balanced (350/class), so weighted sampling adds no benefit.</li>
+<li><strong><code>model.eval()</code> during training:</strong> DenseNet121's frozen BatchNorm layers must stay in eval mode to keep running stats fixed. The classifier head is a plain Linear so train/eval mode makes no difference for it.</li>
+<li><strong>6 classes instead of 5:</strong> SWIMCAT-extend adds F-Veil Clouds vs the original SWIMCAT. The paper's 95.51% benchmark used 5 classes; direct comparison is approximate.</li>
+</ul>
+<hr>
+<h2 id="project-structure-updated-3">Project Structure (updated) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>notebooks/
+└── 13_transfer_learning_densenet121_swimcat.ipynb   ← DenseNet121, SWIMCAT-extend, head only
+</code></pre><hr>
+<hr>
+<h1 id="checkpoint-7--clouddensenet-training-on-nasa-globe">Checkpoint 7 — CloudDenseNet Training on NASA GLOBE </h1>
+<p><strong>Current notebook:</strong> <code>14_transfer_learning_clouddensenet.ipynb</code></p>
+<p>Replication of the CloudDenseNet training pipeline from <em>CloudDenseNet: Lightweight Ground-Based Cloud Classification</em> (Li et al., Sensors 2023), applied to the filtered NASA GLOBE dataset.</p>
+<hr>
+<h2 id="what-this-notebook-does">What This Notebook Does </h2>
+<p>Having confirmed DenseNet121 as the best backbone in Checkpoint 6, this notebook implements the paper's full training methodology:</p>
+<ol>
+<li>Replaces DenseNet121's default linear classifier with a custom <strong>TopBlock</strong> head</li>
+<li>Trains using <strong>Focal Loss</strong> instead of cross-entropy</li>
+<li>Follows the paper's exact <strong>5-phase gradual unfreezing</strong> schedule</li>
+</ol>
+<p>The data pipeline (CSV-filtered NASA GLOBE images, <code>WeightedRandomSampler</code>, augmentation transforms) is carried over unchanged from the previous notebook.</p>
+<hr>
+<h2 id="architecture-topblock">Architecture: TopBlock </h2>
+<p>The paper's TopBlock replaces the standard DenseNet121 linear classifier with a multi-layer MLP, initialised with LeCun uniform distribution:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>BN → Dropout(0.5) → Linear(1024→512) → ReLU → BN → Dropout(0.25) → Linear(512→n_classes)
+</code></pre><p>The paper specifies a 4-layer structure (1024→512→32→n_classes), but their target dataset has only 7 classes, making the 32-neuron bottleneck layer appropriate. With 10 classes here, a 2-layer version is used instead to avoid an unnecessarily tight bottleneck.</p>
+<hr>
+<h2 id="training-schedule">Training Schedule </h2>
+<p>The backbone starts from stock <strong>ImageNet pretrained weights</strong> (<code>IMAGENET1K_V1</code>) — no cloud-specific pretraining. The paper's 5-phase schedule is followed exactly:</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Layers unfrozen</th>
+<th>Head LR</th>
+<th>Backbone LR</th>
+<th>Epochs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TopBlock only</td>
+<td>1e-4</td>
+<td>—</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TopBlock only</td>
+<td>1e-5</td>
+<td>—</td>
+<td>10</td>
+</tr>
+<tr>
+<td>3</td>
+<td>TopBlock + DenseBlock3 onwards</td>
+<td>1e-5</td>
+<td>5e-5</td>
+<td>20</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TopBlock + DenseBlock3 onwards</td>
+<td>1e-5</td>
+<td>1e-5</td>
+<td>20</td>
+</tr>
+<tr>
+<td>5</td>
+<td>All layers</td>
+<td>1e-6</td>
+<td>1e-6</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<p>Phases 1–2 warm up the TopBlock before any backbone weights are touched. Phase 3 onwards unfreezes from DenseNet121's 3rd dense block (layer 141) as specified in the paper. Best weights are checkpointed and restored between phases. Total budget: 80 epochs.</p>
+<hr>
+<h2 id="key-design-decisions-6">Key Design Decisions </h2>
+<ul>
+<li><strong>Focal Loss (γ=2.0):</strong> Down-weights easy, high-confidence examples — better suited than cross-entropy for a dataset where some cloud types are visually ambiguous and hard to separate.</li>
+<li><strong>AdamW with weight decay:</strong> L2 regularisation baked into the optimiser, as specified in the paper, to combat overfitting during the deeper unfreezing phases.</li>
+<li><strong>Frozen BatchNorm handling:</strong> Frozen BN layers are kept in eval mode throughout training so their running statistics are not corrupted by the unfrozen layers' gradients.</li>
+<li><strong><code>max_per_class=3,000</code>:</strong> Matches the paper's 3,000-per-class data scale, drawn directly from the filtered NASA GLOBE pool (10 classes × 3,000 = 30,000 images total; train/val/test split: 21,000 / 3,000 / 6,000).</li>
+<li><strong>Needs Colab:</strong> 80 epochs × 30,000 images at 224×224 is not feasible locally. Target an A100 runtime.</li>
+</ul>
+<hr>
+<h2 id="project-structure-updated-4">Project Structure (updated) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>notebooks/
+└── 14_transfer_learning_clouddensenet.ipynb   ← CloudDenseNet replication, NASA GLOBE, 5-phase unfreeze
+</code></pre><hr>
+<h1 id="checkpoint-8--gcd-backbone-training-clouddensenet-on-gcd-dataset">Checkpoint 8 — GCD Backbone Training (CloudDenseNet on GCD Dataset) </h1>
+<p><strong>Current notebook:</strong> <code>15_1_transfer_learning_gcd_densenet_balanced.ipynb</code></p>
+<p>This checkpoint trains the full CloudDenseNet architecture (DenseNet121 + TopBlock) on the <strong>Ground-based Cloud Dataset (GCD)</strong> — a separate, publicly available benchmark dataset with 7 cloud type classes. The goal is to produce a backbone that has learned cloud-specific visual features, which can then be transferred to NASA GLOBE classification.</p>
+<hr>
+<h2 id="why-gcd-instead-of-training-nasa-globe-end-to-end">Why GCD Instead of Training NASA GLOBE End-to-End </h2>
+<p>The NASA GLOBE dataset suffers from two compounding problems: label ambiguity (several cloud types look similar even to experts) and contamination (non-cloud images under cloud-type labels, partially cleaned by the ResNet18 filter). Training a backbone on GCD first gives the model cloud-domain representations without those problems — GCD is a smaller, cleaner, purpose-built benchmark.</p>
+<hr>
+<h2 id="architecture">Architecture </h2>
+<p>Same TopBlock as notebook 14 (BN → Dropout(0.5) → Linear(1024→512) → ReLU → BN → Dropout(0.25) → Linear(512→n_classes)), but with <code>n_classes=7</code> to match GCD's 7-class taxonomy.</p>
+<hr>
+<h2 id="training-1">Training </h2>
+<ul>
+<li><strong>Dataset:</strong> GCD (7 cloud types), balanced with <code>WeightedRandomSampler</code></li>
+<li><strong>Loss:</strong> FocalLoss (γ=2.0)</li>
+<li><strong>Backbone init:</strong> DenseNet121 ImageNet pretrained weights (<code>IMAGENET1K_V1</code>)</li>
+<li><strong>Schedule:</strong> Gradual unfreezing (same 5-phase schedule as notebook 14, adapted to GCD class count)</li>
+<li><strong>Result:</strong> ~91.5% test accuracy</li>
+<li><strong>Checkpoint:</strong> <code>best_cloudensenet_15_1.pt</code> (local), <code>best_cloudensenet_colab_15_1.pt</code> (Google Drive)</li>
+</ul>
+<hr>
+<h2 id="additions">Additions </h2>
+<p>A <strong>confusion matrix cell</strong> was added after the training curves plot — seaborn heatmap with raw counts, GCD class name labels on both axes, <code>figsize=(9,7)</code>. Uses <code>sklearn.metrics.confusion_matrix</code> with no AMP (local notebook style).</p>
+<hr>
+<h2 id="project-structure-updated-5">Project Structure (updated) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>notebooks/
+├── 14_transfer_learning_clouddensenet.ipynb
+└── 15_1_transfer_learning_gcd_densenet_balanced.ipynb   ← GCD training, 7-class, ~91.5% accuracy
+models/
+├── best_cloudensenet_15_1.pt                            ← local GCD checkpoint
+</code></pre><hr>
+<hr>
+<h1 id="checkpoint-9--gcdglobe-domain-adaptation-notebook-16">Checkpoint 9 — GCD→GLOBE Domain Adaptation (Notebook 16) </h1>
+<p><strong>Current notebooks:</strong> <code>16_gcd_backbone_to_globe.ipynb</code>, <code>colab_16_gcd_backbone_to_globe.ipynb</code></p>
+<p>This checkpoint implements <strong>domain-adaptive transfer learning</strong>: the GCD-trained DenseNet121 backbone from Checkpoint 8 is used as a frozen feature extractor; the 7-class TopBlock head is discarded and replaced with a fresh 10-class TopBlock for NASA GLOBE classification.</p>
+<hr>
+<h2 id="motivation">Motivation </h2>
+<p>The GCD backbone has learned cloud-specific texture and structure representations — visually much closer to NASA GLOBE imagery than ImageNet-trained weights. Starting from a cloud-domain backbone rather than ImageNet is expected to reduce the number of epochs needed and raise the accuracy ceiling, particularly in the ambiguous cloud-type classes.</p>
+<hr>
+<h2 id="3-step-gcd-checkpoint-load">3-Step GCD Checkpoint Load </h2>
+<p>Loading the GCD checkpoint requires matching the saved model's shape (7-class head) before swapping in the 10-class head:</p>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token comment"># Step 1: attach a 7-class TopBlock to match checkpoint shape</span>
+model<span class="token punctuation">.</span>classifier <span class="token operator">=</span> TopBlock<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">,</span> n_classes<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">)</span>
+<span class="token comment"># Step 2: load GCD weights</span>
+model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">'best_cloudensenet_colab_15_1.pt'</span><span class="token punctuation">,</span> weights_only<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># Step 3: freeze backbone, replace head with fresh 10-class TopBlock</span>
+<span class="token keyword keyword-for">for</span> param <span class="token keyword keyword-in">in</span> model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    param<span class="token punctuation">.</span>requires_grad <span class="token operator">=</span> <span class="token boolean">False</span>
+model<span class="token punctuation">.</span>classifier <span class="token operator">=</span> TopBlock<span class="token punctuation">(</span>in_features<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">,</span> n_classes<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+</code></pre><hr>
+<h2 id="3-phase-unfreezing-schedule">3-Phase Unfreezing Schedule </h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Layers unfrozen</th>
+<th>LRs</th>
+<th>Epochs</th>
+<th>Patience</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TopBlock only</td>
+<td>head: 1e-4</td>
+<td>20</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TopBlock + denseblock4 + transition3</td>
+<td>head: 1e-4, block4: 1e-5</td>
+<td>30</td>
+<td>10</td>
+</tr>
+<tr>
+<td>3 (conditional)</td>
+<td>+ denseblock3 + transition2</td>
+<td>head: 1e-4, block4: 1e-5, block3: 5e-6</td>
+<td>20</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>Phase 3 only runs if <code>phase2_best_val − phase1_best_val &gt; 0.01</code> (&gt;1pp improvement gate). Each phase restores the previous phase's best checkpoint before unfreezing and creating the new optimizer. A per-phase checkpoint file is saved (<code>best_nasa_phase1.pt</code>, <code>best_nasa_phase2.pt</code>, <code>best_nasa_phase3.pt</code>).</p>
+<hr>
+<h2 id="results-local-run-2026-05-03">Results (local run, 2026-05-03) </h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Best val accuracy</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 1 (head only, 1e-4)</td>
+<td><strong>0.3237</strong></td>
+<td>Converged by epoch 12</td>
+</tr>
+<tr>
+<td>Phase 2 (block4+tr3, 1e-5)</td>
+<td><strong>0.3447</strong></td>
+<td>+2.1pp over Phase 1 → Phase 3 triggered</td>
+</tr>
+<tr>
+<td>Phase 3 (block3+tr2, 5e-6)</td>
+<td><strong>0.3507</strong></td>
+<td>Early stop at epoch 16 (patience 8)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Final checkpoint:</strong> <code>best_nasa_phase3.pt</code></p>
+<p>Phase 2 gain of +2.10pp exceeded the &gt;1pp gate, so Phase 3 ran. Phase 3 added a further +0.6pp with early stopping at epoch 16.</p>
+<hr>
+<h2 id="notebooks">Notebooks </h2>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>Environment</th>
+<th>Key differences</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>16_gcd_backbone_to_globe.ipynb</code></td>
+<td>Local (MPS)</td>
+<td><code>T.Lambda</code> wrap translation, <code>num_workers=0</code>, <code>batch_size=64</code>, no AMP, CSV-filtered data via <code>index_labeled_images_filtered</code></td>
+</tr>
+<tr>
+<td><code>colab_16_gcd_backbone_to_globe.ipynb</code></td>
+<td>Colab (CUDA)</td>
+<td><code>WrapTranslation</code> picklable class, CUDA AMP (<code>GradScaler</code> + <code>autocast</code>), <code>batch_size=128</code>, <code>fused=True</code>, Drive mount + <code>extract_filtered.zip</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="key-design-decisions-7">Key Design Decisions </h2>
+<ul>
+<li><strong>3-phase over 5-phase:</strong> Reduced from notebook 14's 5-phase schedule to 3 phases — fewer transitions, faster iteration, and the GCD backbone needs less warm-up than an ImageNet backbone since features are already cloud-domain.</li>
+<li><strong>Conditional Phase 3:</strong> Avoids wasting compute on a Phase 3 run when Phase 2 showed no improvement, while still allowing deeper unfreezing when warranted.</li>
+<li><strong>Checkpoint restore between phases:</strong> Each phase starts from the best weights of the previous phase rather than the final epoch, ensuring clean transitions without accumulated suboptimal state.</li>
+<li><strong>Class-balanced sampling:</strong> <code>WeightedRandomSampler</code> handles the uneven GLOBE class sizes (Ct is severely underrepresented).</li>
+</ul>
+<hr>
+<h2 id="project-structure-updated-6">Project Structure (updated) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>notebooks/
+├── 15_1_transfer_learning_gcd_densenet_balanced.ipynb
+├── 16_gcd_backbone_to_globe.ipynb               ← local, domain adaptation, 3-phase
+└── colab_16_gcd_backbone_to_globe.ipynb         ← Colab, domain adaptation, 3-phase, AMP
+models/
+├── best_cloudensenet_15_1.pt                    ← GCD source backbone (local)
+├── best_nasa_phase1.pt                          ← GLOBE Phase 1 checkpoint
+├── best_nasa_phase2.pt                          ← GLOBE Phase 2 checkpoint
+└── best_nasa_phase3.pt                          ← GLOBE Phase 3 checkpoint (final)
+</code></pre><hr>
+<h1 id="checkpoint-10--globe-patches--gcd-clearskymixed-imagenet-init-notebook-18">Checkpoint 10 — GLOBE Patches + GCD (clearsky/mixed), ImageNet Init (Notebook 18) </h1>
+<p><strong>Current notebook:</strong> <code>18_globe_patches_imagenet.ipynb</code></p>
+<p>This checkpoint introduces a <strong>hybrid dataset</strong> strategy: the five GCD cloud types that have a direct NASA GLOBE equivalent are replaced with proportional 224×224 patches extracted from raw GLOBE images, while the two GCD-only classes (<code>4_clearsky</code>, <code>7_mixed</code>) are loaded straight from the GCD split as full images. The backbone starts from <strong>ImageNet weights</strong> (no GCD pre-training), following notebook 15's 5-phase gradual-unfreeze schedule.</p>
+<p><strong>Test accuracy: 0.4987</strong> — a significant jump over the GCD-backbone GLOBE runs (nb16: 0.34, nb17: incomplete), achieved by combining cleaner GLOBE patch data for the 5 shared classes with the precise GCD ground truth for the 2 unique classes.</p>
+<hr>
+<h2 id="motivation-1">Motivation </h2>
+<p>Notebooks 16 and 17 showed that adapting a GCD backbone to the full 10-class GLOBE taxonomy is hard — the domain gap between the two datasets' labelling conventions and image characteristics limits how well GLOBE classification can benefit from GCD pretraining. This notebook tests a different hypothesis: <strong>use GLOBE's own data for the classes where it exists, and fall back to GCD only where there is no GLOBE equivalent</strong>. By keeping the 7-class GCD taxonomy instead of expanding to 10 GLOBE-only classes, the classifier stays focused on a shared taxonomy with higher-quality ground truth for the two GCD-exclusive types.</p>
+<hr>
+<h2 id="class-mapping">Class Mapping </h2>
+<table>
+<thead>
+<tr>
+<th>GCD class</th>
+<th>Source in this notebook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1_cumulus</code></td>
+<td>NASA GLOBE <code>Cu</code> patches</td>
+</tr>
+<tr>
+<td><code>2_altocumulus</code></td>
+<td>NASA GLOBE <code>Ac</code> patches</td>
+</tr>
+<tr>
+<td><code>3_cirrus</code></td>
+<td>NASA GLOBE <code>Ci</code> patches</td>
+</tr>
+<tr>
+<td><code>4_clearsky</code></td>
+<td>GCD full images (no GLOBE equivalent)</td>
+</tr>
+<tr>
+<td><code>5_stratocumulus</code></td>
+<td>NASA GLOBE <code>Sc</code> patches</td>
+</tr>
+<tr>
+<td><code>6_cumulonimbus</code></td>
+<td>NASA GLOBE <code>Cb</code> patches</td>
+</tr>
+<tr>
+<td><code>7_mixed</code></td>
+<td>GCD full images (no GLOBE equivalent)</td>
+</tr>
+</tbody>
+</table>
+<p>Five GLOBE-only classes (As, Cc, Cs, Ns, St) are excluded — this notebook targets the shared taxonomy, not the full GLOBE set.</p>
+<hr>
+<h2 id="data-pipeline-1">Data Pipeline </h2>
+<h3 id="globe-images-5-matching-classes">GLOBE images (5 matching classes) </h3>
+<ol>
+<li>Load raw GLOBE images via <code>cloud_filter_results_1.csv</code> — keep only images with <code>head2_conf ≥ 0.99</code>, cap to 3,000 per class (same as nb16).</li>
+<li>Split at <strong>image level</strong> (70/10/20) before patch expansion to prevent patch leakage across splits.</li>
+<li>Extract proportional 224×224 patches: <code>CROP_FRACTION=0.5</code>, <code>OVERLAP=0.25</code> → ~6.6 patches/image on average.</li>
+<li>Filter patches with ResNet18 cloud classifier: keep patches with <code>head2_conf ≥ 0.5</code>.</li>
+<li>Cap training patches to <strong>3,000/class</strong> (seed=42).</li>
+</ol>
+<blockquote>
+<p>All training patches passed the 0.5 cloud filter (100% kept) — as expected, since parent images were already filtered at 0.99 confidence.</p>
+</blockquote>
+<h3 id="gcd-images-2-classes">GCD images (2 classes) </h3>
+<ul>
+<li>Load <code>4_clearsky</code> and <code>7_mixed</code> from the existing GCD train/test split.</li>
+<li>Carve 20% val from GCD train (stratified, seed=42).</li>
+<li>Apply standard full-image transforms (Resize to 224×224 + RandomResizedCrop augmentation, as in nb15).</li>
+</ul>
+<h3 id="final-split-sizes">Final split sizes </h3>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th>GLOBE patches</th>
+<th>GCD images</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>train</td>
+<td>15,000 (5 × 3,000)</td>
+<td>1,998 (clearsky 1,720 + mixed 278)</td>
+<td>16,998</td>
+</tr>
+<tr>
+<td>val</td>
+<td>9,091</td>
+<td>500</td>
+<td>9,591</td>
+</tr>
+<tr>
+<td>test</td>
+<td>18,178</td>
+<td>2,196</td>
+<td>20,374</td>
+</tr>
+</tbody>
+</table>
+<h3 id="class-counts-in-training-set">Class counts in training set </h3>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Count</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1_cumulus</td>
+<td>3,000</td>
+<td>GLOBE patches</td>
+</tr>
+<tr>
+<td>2_altocumulus</td>
+<td>3,000</td>
+<td>GLOBE patches</td>
+</tr>
+<tr>
+<td>3_cirrus</td>
+<td>3,000</td>
+<td>GLOBE patches</td>
+</tr>
+<tr>
+<td>4_clearsky</td>
+<td>1,720</td>
+<td>GCD full images</td>
+</tr>
+<tr>
+<td>5_stratocumulus</td>
+<td>3,000</td>
+<td>GLOBE patches</td>
+</tr>
+<tr>
+<td>6_cumulonimbus</td>
+<td>3,000</td>
+<td>GLOBE patches</td>
+</tr>
+<tr>
+<td>7_mixed</td>
+<td>278</td>
+<td>GCD full images</td>
+</tr>
+</tbody>
+</table>
+<p><code>WeightedRandomSampler</code> handles the imbalance between GLOBE and GCD classes.</p>
+<hr>
+<h2 id="two-transform-pipelines">Two Transform Pipelines </h2>
+<p>Because GLOBE patches are already 224×224 while GCD images are full-resolution, two separate training transform sets are used:</p>
+<table>
+<thead>
+<tr>
+<th>Transform</th>
+<th>Used for</th>
+<th>Key difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gcd_train_transforms</code></td>
+<td>GCD full images</td>
+<td>includes <code>T.Resize</code> + <code>T.RandomResizedCrop</code></td>
+</tr>
+<tr>
+<td><code>globe_train_transforms</code></td>
+<td>GLOBE patches</td>
+<td>no Resize or RandomResizedCrop — patches already 224×224</td>
+</tr>
+<tr>
+<td><code>eval_transforms</code></td>
+<td>Both val/test</td>
+<td><code>T.Resize</code> (no-op for patches, correct for full images)</td>
+</tr>
+</tbody>
+</table>
+<p>Datasets are combined with <code>ConcatDataset([globe_patch_set, gcd_set])</code>.</p>
+<hr>
+<h2 id="model--training">Model &amp; Training </h2>
+<ul>
+<li><strong>Backbone:</strong> DenseNet121, ImageNet pretrained weights (<code>IMAGENET1K_V1</code>), backbone frozen at start.</li>
+<li><strong>Head:</strong> TopBlock (BN→Dropout(0.5)→Linear(1024→512)→ReLU→BN→Dropout(0.25)→Linear(512→7)), LeCun uniform init.</li>
+<li><strong>Loss:</strong> Focal Loss (γ=2.0).</li>
+<li><strong>Optimiser:</strong> AdamW (weight_decay=1e-4) per phase.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Layers</th>
+<th>Head LR</th>
+<th>Backbone LR</th>
+<th>Epochs</th>
+<th>Patience</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TopBlock only</td>
+<td>1e-4</td>
+<td>—</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TopBlock only</td>
+<td>1e-5</td>
+<td>—</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>3</td>
+<td>TopBlock + DenseBlock3+</td>
+<td>1e-5</td>
+<td>5e-5</td>
+<td>20</td>
+<td>10</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TopBlock + DenseBlock3+</td>
+<td>1e-5</td>
+<td>1e-5</td>
+<td>20</td>
+<td>10</td>
+</tr>
+<tr>
+<td>5</td>
+<td>All layers</td>
+<td>1e-6</td>
+<td>1e-6</td>
+<td>20</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p>Checkpoint: <code>best_cloudensenet_18.pt</code></p>
+<hr>
+<h2 id="result">Result </h2>
+<p><strong>Final test accuracy: 0.4987</strong></p>
+<p>This is the best GLOBE-related result so far — +15pp over the GCD-backbone domain adaptation in nb16 (0.34). The gain likely comes from a combination of: (1) using GLOBE's own images for the 5 shared classes rather than trying to bridge the GCD→GLOBE domain gap, (2) patch-level data augmentation expanding the effective training set ~6.6×, and (3) the precise GCD labels for clearsky/mixed providing clean supervision for those hard-to-filter classes.</p>
+<hr>
+<h2 id="visualisation-cell">Visualisation Cell </h2>
+<p>A patch inspection cell is included immediately after the capping step (cell <code>ea0d9bca</code>). It renders a <strong>5-row × 6-column grid</strong> — one row per GLOBE class, six randomly sampled raw patch crops per row — so it's easy to verify what the model will actually see in training. Patches are shown before any transforms are applied.</p>
+<hr>
+<h2 id="project-structure-updated-7">Project Structure (updated) </h2>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>notebooks/
+├── 15_transfer_learning_gcd_densenet.ipynb           ← GCD 7-class, 5-phase, ImageNet init
+├── 16_gcd_backbone_to_globe.ipynb                    ← GCD backbone → GLOBE 10-class, 3-phase
+├── 17_gcd_backbone_to_globe_patches.ipynb            ← GCD backbone → GLOBE patches, 3-phase
+└── 18_globe_patches_imagenet.ipynb                   ← GLOBE patches + GCD (clearsky/mixed), ImageNet, 5-phase
+models/
+└── best_cloudensenet_18.pt                           ← nb18 checkpoint (test acc 0.4987)
+</code></pre></div>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
