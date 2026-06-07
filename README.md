@@ -1289,6 +1289,111 @@ UPDATE (05/01/2026):
 * **Technical Bottleneck:** Identified that ImageNet-based weights struggle with the amorphous textures of clouds. Further progress requires unfreezing deeper layers, which is currently limited by local compute power.
 * **Strategic Pivot:** Transitioning to **AWS** for future training runs to enable more intensive fine-tuning and dataset expansion.
 
+# Checkpoint 11 — GCD→GLOBE Domain Adaptation Experiments (Notebooks 20–24)
+
+**Current notebooks:** `20_globe_patches_densenet_5class.ipynb`, `21_gcd_model_inference_on_globe_patches.ipynb`, `22_finetune_gcd_model_on_globe.ipynb`, `23_gcd_model_best_patch_per_image.ipynb`, `24_gcd_model_gradcam_crop.ipynb`
+
+This checkpoint narrows the taxonomy to the **5-class shared subset** (cumulus, altocumulus, cirrus, stratocumulus, cumulonimbus) and systematically measures the domain gap between the clean GCD benchmark and the real-world NASA GLOBE citizen-science photos.
+
+---
+
+## Motivation
+
+The GCD dataset yields ~91% test accuracy (notebook 15_2) — essentially a solved problem in-domain. The question is: does this trained model generalise to GLOBE photos, which are noisier, more varied in angle and lighting, and not professionally curated? A series of experiments measures the gap and explores ways to close it without retraining from scratch each time.
+
+---
+
+## Notebooks Overview
+
+| Notebook | Method | Accuracy |
+|---|---|---|
+| `15_2_transfer_learning_gcd_densenet_5class.ipynb` | DenseNet121 + TopBlock trained on GCD (5-class), Focal Loss, gradual unfreeze | **~91%** |
+| `20_globe_patches_densenet_5class.ipynb` | Same architecture trained from scratch on GLOBE patches | **~42%** |
+| `21_gcd_model_inference_on_globe_patches.ipynb` | GCD model applied zero-shot to GLOBE patches (no adaptation) | **35.6%** |
+| `22_finetune_gcd_model_on_globe.ipynb` | GCD model fine-tuned on GLOBE — same gradual-unfreeze schedule | **42.5%** |
+| `23_gcd_model_best_patch_per_image.ipynb` | GCD model, best-patch-per-image selection via cloud filter | **34.5%** |
+| `24_gcd_model_gradcam_crop.ipynb` | GCD model, GradCAM-guided crop then reclassify | **36.6%** |
+
+---
+
+## 1. GCD 5-Class Training (Notebook 15_2)
+
+The GCD dataset is filtered to the 5 classes that have direct GLOBE equivalents (`1_cumulus`, `2_altocumulus`, `3_cirrus`, `5_stratocumulus`, `6_cumulonimbus`). DenseNet121 + TopBlock is trained with Focal Loss (γ=2.0) and a 5-phase gradual-unfreeze schedule. Result: **~91% test accuracy** with a near-perfect confusion matrix diagonal. Saved as `best_cloudensenet_15_2.pt`.
+
+---
+
+## 2. GLOBE Patches from Scratch (Notebook 20)
+
+A PatchDataset slides proportional 224×224 crops across each GLOBE image (`CROP_FRACTION=0.5`, `OVERLAP=0.25`). A cloud-confidence filter (MultiHeadResNet18, threshold=0.99) removes patches that are mostly sky or ground before training. The 60/20/20 image-level split prevents patch leakage across splits. Trained from ImageNet weights using the same architecture and schedule as 15_2. Result: **~42% accuracy** — a ceiling that reflects the inherent difficulty of the domain.
+
+---
+
+## 3. Zero-Shot GCD → GLOBE (Notebook 21)
+
+The `best_cloudensenet_15_2.pt` checkpoint is applied directly to GLOBE patches with no adaptation. Result: **35.6% accuracy** — a ~55pp drop from its in-domain performance. Key failure modes visible in the confusion matrix:
+- Altocumulus and cumulus are dominant prediction sinks
+- Cirrus recall collapses to 0.179 — the model almost never predicts it
+- Stratocumulus recall: 0.120
+
+---
+
+## 4. Fine-Tuning on GLOBE (Notebook 22)
+
+The GCD checkpoint is loaded and fine-tuned on GLOBE patches using the same 3-phase gradual-unfreeze schedule. Starting from cloud-domain features rather than ImageNet weights means the model converges faster and reaches **42.5% accuracy** — slightly above the from-scratch result (42%) and the best result among all approaches. Saved as `best_cloudensenet_22.pt`.
+
+Key improvements over zero-shot:
+- Cirrus recall: 0.179 → 0.423
+- Stratocumulus recall: 0.120 → 0.421
+- Cumulonimbus recall: 0.360 → 0.325 (slight regression — class boundaries shift)
+
+---
+
+## 5. Image-Side Adaptation Experiments (Notebooks 23 & 24)
+
+Two experiments test whether better crop selection can substitute for fine-tuning — i.e. make GLOBE images look more like GCD images before inference.
+
+### Best patch per image (Notebook 23)
+Instead of keeping all cloud-confident patches (nb21), keep only the single highest cloud-confidence patch per source image. Hypothesis: one tight crop per photo looks more like a curated GCD image. Result: **34.5%** — slightly worse than the sliding-window baseline. The "cloudiest" patch is not the same as the "most class-discriminative" patch; the cloud filter scores cloud vs sky, not cloud type.
+
+### GradCAM-guided crop (Notebook 24)
+A two-pass approach: (1) run the GCD model on the full resized image and generate a GradCAM heatmap from `features.norm5`; (2) crop the original image to the activated region; (3) re-classify the tight crop. Result: **36.6%** — marginally better than the baseline.
+
+Notable class-level effects:
+- Cirrus precision: 0.724 (highest of any class across all experiments)
+- Stratocumulus recall collapses to 0.027 — the model's GradCAM focuses on convective-looking regions in Sc photos, which it then misclassifies as cumulonimbus
+
+**Implementation note:** DenseNet121's forward applies `F.relu(features, inplace=True)` on the norm5 output, which is incompatible with `retain_grad()`. The fix patches the model's forward to use `inplace=False` while GradCAM is active, then restores the original on cleanup.
+
+---
+
+## Key Finding
+
+The domain gap between GCD and GLOBE is primarily about **visual style** (lighting, angle, JPEG quality, sky coverage in the frame) — not crop framing. Better crop selection helps marginally at best and can actively hurt (nb23). Fine-tuning on the target domain (nb22) is the only approach that systematically closes the gap. The ceiling of ~42% on GLOBE 5-class likely reflects irreducible label noise in citizen-science annotations rather than a model limitation.
+
+---
+
+## Project Structure
+
+```
+notebooks/
+├── 15_2_transfer_learning_gcd_densenet_5class.ipynb   ← GCD 5-class, ~91% accuracy
+├── 20_globe_patches_densenet_5class.ipynb             ← GLOBE from scratch, ~42%
+├── 21_gcd_model_inference_on_globe_patches.ipynb      ← zero-shot GCD→GLOBE, 35.6%
+├── 22_finetune_gcd_model_on_globe.ipynb               ← fine-tuned, 42.5%
+├── 23_gcd_model_best_patch_per_image.ipynb            ← best-patch selection, 34.5%
+└── 24_gcd_model_gradcam_crop.ipynb                    ← GradCAM crop, 36.6%
+models/
+├── best_cloudensenet_15_2.pt                          ← GCD 5-class source checkpoint
+└── best_cloudensenet_22.pt                            ← GLOBE fine-tuned checkpoint
+confusion matrices/
+├── confusion matrix GCD on GLOBE patches.png
+├── confusion matrix GCD finetuned on GLOBE.png
+├── confusion matrix GCD best patch per image.png
+└── confusion matrix GCD gradcam crop.png
+```
+
+---
+
 # Appendix
 ### Random Forest Discussion
 The confusion matrices for Random Forest:
